@@ -61,7 +61,7 @@ $queryResult = $pdo->query("SELECT * from  tracks    ");
         <?php endwhile; ?>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-success" onclick="location ='details.php '">Add</button>
+    <button type="submit" class="btn btn-success" onclick="location ='add.php '">Add</button>
 </div><!-- /.container -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
     $server = 'localhost';
-    $database = 'music';
+    $database = 'atunes';
     $user = 'manolo';
     $pass = 'manolo';
