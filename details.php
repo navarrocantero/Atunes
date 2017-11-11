@@ -16,7 +16,7 @@ $track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date
 
 $track = getSqlResult($id, $pdo);
 
- if (!empty($_POST)) {
+if (!empty($_POST)) {
 
     $track['name'] = htmlspecialchars(trim($_POST['name']));
     $track['size'] = htmlspecialchars(trim($_POST['size']));
@@ -85,15 +85,14 @@ $track = getSqlResult($id, $pdo);
         // Si no tengo errores de validación
         // Guardo en la BD
 
-        $sql = "Update tracks set name = :image, artist = :artist, size = :size, total_time = :total_time,
+        $sql = "Update tracks set name = :name, artist = :artist, size = :size, total_time = :total_time,
                 date_added = :date_added, play_date = :play_date, play_date_utc = :play_date_utc, 
                 persistent_id = :persistent_id, track_type = :track_type, file_folder_count = :file_folder_count,
                 album = :album, genre = :genre, location = :location, rating = :rating WHERE id = :id LIMIT 1";
 
         $result = $pdo->prepare($sql);
-        dameDato($track);
-        $result->execute([
-            'id' => $id,
+         $result->execute([
+            'id' => $track['id'],
             'name' => $track['name'],
             'artist' => $track['artist'],
             'size' => $track['size'],
@@ -345,11 +344,13 @@ $error = !empty($errors) ? false : $track;
             </div>
         <?php endif; ?>
 
+        <div class="buttons">
 
-        <input type="hidden" name="id" value="<?= $track['id'] ?>">
-        <button type="submit" class="btn btn-success">Submit</button>
+            <input type="hidden" name="id" value="<?= $track['id'] ?>">
+            <button type="submit" class="btn btn-success">Submit</button>
 
-        <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger">Delete</a>
+            <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
+        </div>
     </form>
 
 </div><!-- /.container -->
