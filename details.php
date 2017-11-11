@@ -4,131 +4,117 @@ include_once 'connectdb.php';
 include_once 'helpers.php';
 include_once 'dbhelper.php';
 
+$id = $_REQUEST['id'];
+
+
 $errors = array();
 $error = false;
 
-$id = $_REQUEST['id'];
+$track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date", "play_date_utc",
+    "persistent_id", "track_type", "file_folder_count", "album", "genre", "location", "name", "artist", "rating"],
+    "");
+
 $track = getSqlResult($id, $pdo);
 
-//dameDato($track);
+ if (!empty($_POST)) {
 
-if (!$track) {
-    header('Location: index.php');
-}
+    $track['name'] = htmlspecialchars(trim($_POST['name']));
+    $track['size'] = htmlspecialchars(trim($_POST['size']));
+    $track['total_time'] = htmlspecialchars(trim($_POST['total_time']));
+    $track['date_added'] = htmlspecialchars(trim($_POST['date_added']));
+    $track['play_date'] = htmlspecialchars(trim($_POST['play_date']));
+    $track['play_date_utc'] = htmlspecialchars(trim($_POST['play_date_utc']));
+    $track['persistent_id'] = htmlspecialchars(trim($_POST['persistent_id']));
+    $track['track_type'] = htmlspecialchars(trim($_POST['track_type']));
+    $track['file_folder_count'] = htmlspecialchars(trim($_POST['file_folder_count']));
+    $track['album'] = htmlspecialchars(trim($_POST['album']));
+    $track['genre'] = htmlspecialchars(trim($_POST['genre']));
+    $track['location'] = htmlspecialchars(trim($_POST['location']));
+    $track['artist'] = htmlspecialchars(trim($_POST['artist']));
+    $track['rating'] = htmlspecialchars(trim($_POST['rating']));
 
-
-if (!empty($_REQUEST)) {
-
-    // Aqui se carga la row track
-
-    // Valores NOT NULL
-    $size = getValue($track, "size");
-    $total_time = getValue($track, "total_time");
-    $date_added = getValue($track, "date_added");
-    $play_date = getValue($track, "play_date_utc");
-    $play_date_utc = getValue($track, "play_date_utc");
-    $persistent_id = getValue($track, "persistent_id");
-    $track_type = getValue($track, "track_type");
-    $file_folder_count = getValue($track, "file_folder_count");
-    $album = getValue($track, "album");
-    $genre = getValue($track, "genre");
-    $location = getValue($track, "location");
-    $name = getValue($track, "name");
-    $artist = getValue($track, "artist");
-
-
-    // Valores que pueden ser nulos
-//    $track_number = getValue($track, "track_number");
-//    $bpm = getValue($track, "bpm");
-//    $date_modified = getValue($track, "date_modified");
-//    $bit_rate = getValue($track, "bit_rate");
-//    $sample_rate = getValue($track, "sample_rate");
-//    $play_count = getValue($track, "play_count");
-//    $skip_count = getValue($track, "skip_count");
-//    $skip_date = getValue($track, "skip_date");
-//    $rating = getValue($track, "rating");
-//    $rating_computed = getValue($track, "rating_computed");
-//    $compilation = getValue($track, "compilation");
-//    $artwork_count = getValue($track, "artwork_count");
-//    $album_artist = getValue($track, "album_artist");
-//    $kind = getValue($track, "sort_album_list");
-//    $library_folder_count = getValue($track, "library_folder_count");
-//    $sort_album_list = getValue($track, "sort_album_list");
-
-    if ($name == "") {
-        $errors['name']['required'] = "El campo nombre es requerido";
+    if (($track['name']) == "") {
+        $errors['name']['required'] = "El campo nombre es requeridoº";
     }
-    if ($artist == "") {
+    if (($track['artist']) == "") {
         $errors['artist']['required'] = "El campo artista es requerido";
     }
-    if ($size == "") {
+    if (($track['rating']) == "") {
+        $errors['rating']['required'] = "El campo rating es requerido";
+    }
+    if (((int)(($track['rating'])) > 5) || (int)(($track['rating'])) < 0) {
+        $errors['rating']['required'] = "Rating debe estar entre 0 y 5";
+    }
+    if (($track['size']) == "") {
         $errors['size']['required'] = "El campo size es requerido";
     }
-    if ($total_time == "") {
+    if (($track['total_time']) == "") {
         $errors['total_time']['required'] = "El campo total_time es requerido";
     }
-    if ($date_added == "") {
+    if (($track['date_added']) == "") {
         $errors['date_added']['required'] = "El campo date_added es requerido";
     }
-    if ($play_date == "") {
+    if (($track['play_date']) == "") {
         $errors['play_date']['required'] = "El campo play_date es requerido";
     }
-    if ($play_date_utc == "") {
+    if (($track['play_date_utc']) == "") {
         $errors['play_date_utc']['required'] = "El campo play_date_utc es requerido";
     }
-    if ($persistent_id == "") {
+    if (($track['persistent_id']) == "") {
         $errors['persistent_id']['required'] = "El campo persistent_id es requerido";
     }
-    if ($track_type == "") {
+    if (($track['track_type']) == "") {
         $errors['track_type']['required'] = "El campo track_type es requerido";
     }
-    if ($file_folder_count == "") {
+    if (($track['file_folder_count']) == "") {
         $errors['file_folder_count']['required'] = "El campo file_folder_count es requerido";
     }
-    if ($album == "") {
+    if (($track['album']) == "") {
         $errors['album']['required'] = "El campo album es requerido";
     }
-    if ($genre == "") {
+    if (($track['genre']) == "") {
         $errors['genre']['required'] = "El campo genre es requerido";
     }
-    if ($location == "") {
+    if (($track['location']) == "") {
         $errors['location']['required'] = "El campo location es requerido";
     }
 
-    if (!empty($errors)) {
+
+    if (empty($errors)) {
 
         // Si no tengo errores de validación
         // Guardo en la BD
-        if (!$error) {
-            $sql = "UPDATE tracks set   name = :name, artist = :artist, size = : size, total_time = :total_time, date_added = :date_added, play_date = :play_date, play_date_utc = :play_date_utc, persistent_it = :persistent_id, track_type = :track_type, file_folder_count = :file_folder_count, album = :album, genre = :genre, location = :location WHERE id = :id LIMIT 1";
 
-            $result = $pdo->prepare($sql);
+        $sql = "Update tracks set name = :image, artist = :artist, size = :size, total_time = :total_time,
+                date_added = :date_added, play_date = :play_date, play_date_utc = :play_date_utc, 
+                persistent_id = :persistent_id, track_type = :track_type, file_folder_count = :file_folder_count,
+                album = :album, genre = :genre, location = :location, rating = :rating WHERE id = :id LIMIT 1";
 
-            $result->execute([
-                'name' => $name,
-                'artist' => $artist,
-                'size' => $size,
-                'total_time' => $total_time,
-                'date_added' => $date_added,
-                'play_date' => $play_date,
-                'play_date_utc' => $play_date_utc,
-                'persistent_id' => $persistent_id,
-                'track_type' => $track_type,
-                'file_folder_count' => $file_folder_count,
-                'album' => $album,
-                'genre' => $genre,
-                'location' => $location,
-            ]);
-            header('Location: index.php');
-        }
+        $result = $pdo->prepare($sql);
+        dameDato($track);
+        $result->execute([
+            'id' => $id,
+            'name' => $track['name'],
+            'artist' => $track['artist'],
+            'size' => $track['size'],
+            'total_time' => $track['total_time'],
+            'date_added' => $track['date_added'],
+            'play_date' => $track['play_date'],
+            'play_date_utc' => $track['play_date_utc'],
+            'persistent_id' => $track['persistent_id'],
+            'track_type' => $track['track_type'],
+            'file_folder_count' => $track['file_folder_count'],
+            'album' => $track['album'],
+            'genre' => $track['genre'],
+            'location' => $track['location'],
+            'rating' => $track['rating']
+        ]);
+        header('Location: index.php');
+    } else {
+        $error = true;
     }
-} else {
-    $error = true;
-
 }
-$error = !empty($errors) ? false : true;
-
-
+$error = !empty($errors) ? false : $track;
 ?>
 
 
@@ -165,14 +151,14 @@ $error = !empty($errors) ? false : true;
         </div>
     </nav>
 
-    <h1>Details of : </h1>
+    <h1>ADD : </h1>
 
     <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['name']['required']) ? " has-error" : ""); ?>">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="name"
-                   value="<?= ($error ? $name : "") ?>">
+            <input type="text" class="form-control" id="name" name="name" placeholder="track's name"
+                   value="<?= ($error ? $track['name'] : "") ?>">
         </div>
         <?php if (isset($errors['name'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -181,30 +167,38 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['name']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['artist']['required']) ? " has-error" : ""); ?>">
             <label for="artist">Artist</label>
-            <input type="text" class="form-control" id="artist" name="total_time" placeholder="artist"
-                   value="<?= ($error ? $artist : "") ?>">
+            <input type="text" class="form-control" id="artist" name="artist" placeholder="artist"
+                   value="<?= ($error ? $track['artist'] : "") ?>">
         </div>
-        <?php if (isset($errors['total_time'])): ?>
+        <?php if (isset($errors['artist'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
                 <strong><?= $errors['artist']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
+        <div class="form-group<?php echo(isset($errors['rating']['required']) ? " has-error" : ""); ?>">
+            <label for="rating">rating</label>
+            <input type="number" class="form-control" id="rating" name="rating" placeholder="0 => 5"
+                   value="<?= ($error ? $track['rating'] : "") ?>">
+        </div>
+        <?php if (isset($errors['rating'])): ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <strong><?= $errors['rating']['required'] ?></strong>
+            </div>
+        <?php endif; ?>
+
 
         <div class="form-group<?php echo(isset($errors['size']['required']) ? " has-error" : ""); ?>">
-            <label for="Size">Size</label>
-            <input type="text" class="form-control" id="size" name="size" placeholder="size"
-                   value="<?= ($error ? $size : "") ?>">
+            <label for="size">Size</label>
+            <input type="number" class="form-control" id="size" name="size" placeholder="in KB"
+                   value="<?= ($error ? $track['size'] : "") ?>">
         </div>
         <?php if (isset($errors['date_added'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -213,14 +207,11 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['size']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['total_time']['required']) ? " has-error" : ""); ?>">
             <label for="Total_time">Total_time</label>
-            <input type="text" class="form-control" id="total_time" name="total_time" placeholder="total_time"
-                   value="<?= ($error ? $total_time : "") ?>">
+            <input type="number" class="form-control" id="total_time" name="total_time" placeholder="in MS"
+                   value="<?= ($error ? $track['total_time'] : "") ?>">
         </div>
         <?php if (isset($errors['total_time'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -229,14 +220,11 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['total_time']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['date_added']['required']) ? " has-error" : ""); ?>">
             <label for="date_added">date_added</label>
-            <input type="text" class="form-control" id="date_added" name="date_added" placeholder="date_added"
-                   value="<?= ($error ? $date_added : "") ?>">
+            <input type="date" class="form-control" id="date_added" name="date_added" placeholder="date_added"
+                   value="<?= ($error ? $track['date_added'] : "") ?>">
         </div>
         <?php if (isset($errors['date_added'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -245,14 +233,12 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['date_added']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['play_date']['required']) ? " has-error" : ""); ?>">
             <label for="play_date">play_date</label>
-            <input type="text" class="form-control" id="play_date" name="play_date" placeholder="play_date"
-                   value="<?= ($error ? $play_date : "") ?>">
+            <input type="date" class="form-control" id="play_date" name="play_date" placeholder="play_date"
+                   value="<?= ($error ? $track['play_date'] : "") ?>">
         </div>
         <?php if (isset($errors['date_added'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -261,14 +247,11 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['play_date']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['play_date_utc']['required']) ? " has-error" : ""); ?>">
             <label for="play_date_utc">play_date_utc</label>
-            <input type="text" class="form-control" id="play_date_utc" name="play_date_utc" placeholder="play_date_utc"
-                   value="<?= ($error ? $play_date_utc : "") ?>">
+            <input type="date" class="form-control" id="play_date_utc" name="play_date_utc" placeholder="play_date_utc"
+                   value="<?= ($error ? $track['play_date_utc'] : "") ?>">
         </div>
         <?php if (isset($errors['date_added'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -277,14 +260,13 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['play_date']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['persistent_id']['required']) ? " has-error" : ""); ?>">
             <label for="persistent_id">persistent_id</label>
-            <input type="text" class="form-control" id="persistent_id" name="persistent_id" placeholder="persistent_id"
-                   value="<?= ($error ? $persistent_id : "") ?>">
+            <input type="number" class="form-control" id="persistent_id" name="persistent_id"
+                   placeholder="persistent_id"
+                   value="<?= ($error ? $track['persistent_id'] : "") ?>">
         </div>
         <?php if (isset($errors['persistent_id'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -293,14 +275,12 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['persistent_id']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['track_type']['required']) ? " has-error" : ""); ?>">
             <label for="track_type">track_type</label>
             <input type="text" class="form-control" id="track_type" name="track_type" placeholder="track_type"
-                   value="<?= ($error ? $track_type : "") ?>">
+                   value="<?= ($error ? $track['track_type'] : "") ?>">
         </div>
         <?php if (isset($errors['track_type'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -309,15 +289,12 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['track_type']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['file_folder_count']['required']) ? " has-error" : ""); ?>">
             <label for="file count">file_folder_count</label>
-            <input type="text" class="form-control" id="file_folder_count" name="file_folder_count"
+            <input type="number" class="form-control" id="file_folder_count" name="file_folder_count"
                    placeholder="file_folder_count"
-                   value="<?= ($error ? $file_folder_count : "") ?>">
+                   value="<?= ($error ? $track['file_folder_count'] : "") ?>">
         </div>
         <?php if (isset($errors['file_folder_count'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -326,14 +303,12 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['file_folder_count']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['album']['required']) ? " has-error" : ""); ?>">
             <label for="album">album</label>
             <input type="text" class="form-control" id="album" name="album" placeholder="album"
-                   value="<?= ($error ? $album : "") ?>">
+                   value="<?= ($error ? $track['album'] : "") ?>">
         </div>
         <?php if (isset($errors['album'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -342,14 +317,12 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['album']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
 
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['genre']['required']) ? " has-error" : ""); ?>">
             <label for="genre">genre</label>
             <input type="text" class="form-control" id="genre" name="genre" placeholder="genre"
-                   value="<?= ($error ? $genre : "") ?>">
+                   value="<?= ($error ? $track['genre'] : "") ?>">
         </div>
         <?php if (isset($errors['genre'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -358,14 +331,11 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['genre']['required'] ?></strong>
             </div>
         <?php endif; ?>
-    </form>
-
-    <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['location']['required']) ? " has-error" : ""); ?>">
             <label for="location">location</label>
             <input type="text" class="form-control" id="location" name="location" placeholder="location"
-                   value="<?= ($error ? $location : "") ?>">
+                   value="<?= ($error ? $track['location'] : "") ?>">
         </div>
         <?php if (isset($errors['location'])): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -374,9 +344,13 @@ $error = !empty($errors) ? false : true;
                 <strong><?= $errors['location']['required'] ?></strong>
             </div>
         <?php endif; ?>
+
+
+        <input type="hidden" name="id" value="<?= $track['id'] ?>">
+        <button type="submit" class="btn btn-success">Submit</button>
+
+        <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger">Delete</a>
     </form>
-    <input type="hidden" name="id" value="<?= $id ?>">
-    <button type="submit" class="btn btn-success">Submit</button>
 
 </div><!-- /.container -->
 </body>

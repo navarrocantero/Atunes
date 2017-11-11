@@ -51,8 +51,9 @@ $queryResult = $pdo->query("SELECT * from  tracks    ");
         </thead>
         <tbody>
         <?php while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)): ?>
-            <tr onclick="location = 'details.php?id=<?= $row['id'] ?>'">
-                <td class="row"><?= $row['name'] ?></td>
+            <tr>
+                <td class="row"><a href='details.php?id=<?= $row['id'] ?>'>
+                        <?= $row['name'] ?></a></td>
                 <td class="row"><?= $row['artist'] ?></td>
                 <td class="row"><?= $row['album'] ?></td>
                 <td class="row"><?= $row['rating'] ?></td>
