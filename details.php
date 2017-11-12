@@ -91,7 +91,7 @@ if (!empty($_POST)) {
                 album = :album, genre = :genre, location = :location, rating = :rating WHERE id = :id LIMIT 1";
 
         $result = $pdo->prepare($sql);
-         $result->execute([
+        $result->execute([
             'id' => $track['id'],
             'name' => $track['name'],
             'artist' => $track['artist'],
