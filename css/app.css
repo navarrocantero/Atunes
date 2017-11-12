@@ -17,3 +17,8 @@ table{
     display: flex;
     justify-content: space-between;
 }
+
+.buttonIndex {
+    display: flex;
+    flex-direction: row-reverse;
+}

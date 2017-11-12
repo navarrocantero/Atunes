@@ -141,13 +141,12 @@ $error = !empty($errors) ? false : $track;
                 </button>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="h2"><a href="index.php">Tracks</a></li>
-                    <li class="h2"><a href="albums.php">Albums</a></li>
-                    <li class="h2"><a href="add.php">Artists</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="h2"><a href="index.php">ATuns</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
     </nav>
 
     <h1>ADD : </h1>
@@ -345,14 +344,12 @@ $error = !empty($errors) ? false : $track;
         <?php endif; ?>
 
         <div class="buttons">
+            <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
 
             <input type="hidden" name="id" value="<?= $track['id'] ?>">
             <button type="submit" class="btn btn-success">Submit</button>
-
-            <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
         </div>
     </form>
-
 </div><!-- /.container -->
 </body>
 </html>

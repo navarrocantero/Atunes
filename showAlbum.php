@@ -2,7 +2,7 @@
 include_once 'config.php';
 include_once 'connectdb.php';
 include_once 'helpers.php';
-$queryResult = $pdo->query("SELECT * from  albums  ");
+$queryResult = $pdo->query("SELECT * from  tracks    ");
 
 ?>
 <html lang="es">
@@ -42,17 +42,20 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
         <tr>
             <th>Name</th>
             <th>Artist</th>
-            <th>Type</th>
+            <th>Album</th>
+            <th>Rating</th>
+            <th>Genre</th>
         </tr>
         </thead>
         <tbody>
         <?php while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
-              <td><img src="<?=$row['image']?>" alt="Logo de <?=$row['name']?>"></td>
                 <td class="row"><a href='details.php?id=<?= $row['id'] ?>'>
                         <?= $row['name'] ?></a></td>
                 <td class="row"><?= $row['artist'] ?></td>
-                <td class="row"><?= $row['album_type'] ?></td>
+                <td class="row"><?= $row['album'] ?></td>
+                <td class="row"><?= $row['rating'] ?></td>
+                <td class="row"><?= $row['genre'] ?></td>
             </tr>
         <?php endwhile; ?>
         </tbody>

@@ -147,9 +147,7 @@ $error = !empty($errors) ? true : false;
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="h2"><a href="index.php">Tracks</a></li>
-                    <li class="h2"><a href="albums.php">Albums</a></li>
-                    <li class="h2"><a href="add.php">Artists</a></li>
+                    <li class="h2"><a href="index.php">ATuns</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
