@@ -1,5 +1,5 @@
 <?php
     $server = 'localhost';
-    $database = 'atunes';
+    $database = 'atuns';
     $user = 'manolo';
     $pass = 'manolo';

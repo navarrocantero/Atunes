@@ -10,71 +10,137 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Database: `atunes`
---
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tracks`
 --
-CREATE DATABASE atunes;
+CREATE DATABASE atuns;
 
+CREATE TABLE atuns.tracks
+(
+  id                   INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  size                 TEXT                NOT NULL,
+  total_time           TEXT                NOT NULL,
+  date_added           TEXT                NOT NULL,
+  play_date            TEXT                NOT NULL,
+  play_date_utc        TEXT                NOT NULL,
+  persistent_id        VARCHAR(100)        NOT NULL,
+  track_type           VARCHAR(100)        NOT NULL,
+  file_folder_count    VARCHAR(100)        NOT NULL,
+  album                TEXT                NOT NULL,
+  genre                TEXT                NOT NULL,
+  name                 VARCHAR(100)        NOT NULL,
+  artist               TEXT                NOT NULL,
+  location             TEXT                NOT NULL,
+  rating               TEXT,
+  track_number         TEXT,
+  bpm                  TEXT,
+  date_modified        TEXT,
+  bit_rate             TEXT,
+  sample_rate          TEXT,
+  play_count           TEXT,
+  skip_count           TEXT,
+  skip_date            TEXT,
+  rating_computed      TEXT,
+  compilation          TEXT,
+  artwork_count        TEXT,
+  album_artist         TEXT,
+  kind                 TEXT,
+  library_folder_count VARCHAR(100),
+  sort_album_list      TEXT
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+;
 
-CREATE TABLE atunes.tracks
+CREATE TABLE atuns.albums
 (
     id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    size text NOT NULL,
-    total_time text NOT NULL,
-    date_added text NOT NULL,
-    play_date text NOT NULL,
-    play_date_utc text NOT NULL,
-    persistent_id varchar(100) NOT NULL,
-    track_type varchar(100) NOT NULL,
-    file_folder_count varchar(100) NOT NULL,
-    album text NOT NULL,
-    genre text NOT NULL,
-    name varchar(100) NOT NULL,
+    name text NOT NULL,
     artist text NOT NULL,
-    location text NOT NULL,
-    rating text,
-    track_number text,
-    bpm text,
-    date_modified text,
-    bit_rate text,
-    sample_rate text,
-    play_count text,
-    skip_count text,
-    skip_date text,
-    rating_computed text,
-    compilation text,
-    artwork_count text,
-    album_artist text,
-    kind text,
-    library_folder_count varchar(100),
-    sort_album_list text
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;;
+    image text,
+    album_type text
+);
 
 --
 -- Dumping data for table `tracks`
 --
 
 
-INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
-('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track01', 'hans', 'c:', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
- ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track02', 'hans', 'c:', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
- INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
- ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track03', 'hans', 'c:', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
- INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track04', 'hans', 'c:', '2', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track01',
+    'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+                      'track02', 'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+   NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track03',
+    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+                      'track04', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+   NULL, NULL, NULL, NULL);
 
-INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
-('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track05', 'hans', 'c:', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
- ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track06', 'hans', 'c:', '2', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
- INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
- ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track07', 'hans', 'c:', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
- INSERT INTO atunes.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list) VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track08', 'hans', 'c:', '5', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track05',
+    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+                      'track06', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+   NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track07',
+    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+                      'track08', 'hans', 'c:', '5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+   NULL, NULL, NULL, NULL);
+
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'esto es estopa', 'pop', 'track01',
+    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'esto es estopa', 'pop', 'track02',
+    'estopa', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track03',
+    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track04',
+    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track05',
+    'estopa', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track06',
+    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
+VALUES
+  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '2', 'esto es estopa', 'pop', 'track07',
+    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+
+ INSERT into atuns.albums (name, artist, image, album_type) VALUES ("Esto es estopa","estopa","https://pbs.twimg.com/profile_images/2892128671/c556a247b8c750b6f6b4e9789d124438.jpeg","album");
+ INSERT into atuns.albums (name, artist, image, album_type) VALUES ("Hans zimmer live","Hans","https://c-sf.smule.com/sf/s60/arr/82/16/3943afa6-9421-4dce-8b4c-8648b3b793b1_256.jpg","album");

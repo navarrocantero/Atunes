@@ -149,7 +149,7 @@ $error = !empty($errors) ? false : $track;
             </div>
     </nav>
 
-    <h1>ADD : </h1>
+    <h1>Details of : </h1>
 
     <form action="" method="post">
 
@@ -347,7 +347,7 @@ $error = !empty($errors) ? false : $track;
             <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
 
             <input type="hidden" name="id" value="<?= $track['id'] ?>">
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">Save</button>
         </div>
     </form>
 </div><!-- /.container -->

@@ -67,7 +67,7 @@ $error = !empty($errors) ? true : false;
                 <ul class="nav navbar-nav">
                     <li class="h2"><a href="index.php">Tracks</a></li>
                     <li class="h2"><a href="albums.php">Albums</a></li>
-                    <li class="h2"><a href="add.php">Artists</a></li>
+                    <li class="h2"><a href="addTrack.php">Artists</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

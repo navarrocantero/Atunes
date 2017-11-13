@@ -2,7 +2,17 @@
 include_once 'config.php';
 include_once 'connectdb.php';
 include_once 'helpers.php';
-$queryResult = $pdo->query("SELECT * from  tracks    ");
+
+$name = htmlspecialchars($_REQUEST['name']);
+$id = $_REQUEST['id'];
+
+
+
+$sql = " select * from tracks where album = :name";
+$queryResult = $pdo->prepare($sql);
+$queryResult->execute([
+    'name' => $name
+]);
 
 ?>
 <html lang="es">
@@ -61,7 +71,7 @@ $queryResult = $pdo->query("SELECT * from  tracks    ");
         </tbody>
     </table>
     <div class="buttonIndex">
-        <button type="submit" class="btn btn-success " onclick="location ='add.php '">Add</button>
+        <button type="submit" class="btn btn-success " onclick="location ='addTrack.php '">Add</button>
     </div>
 </div><!-- /.container -->
 </body>

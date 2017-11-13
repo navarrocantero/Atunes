@@ -40,6 +40,7 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
     <table class="table table-hover">
         <thead>
         <tr>
+            <th></th>
             <th>Name</th>
             <th>Artist</th>
             <th>Type</th>
@@ -49,7 +50,7 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
         <?php while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
               <td><img src="<?=$row['image']?>" alt="Logo de <?=$row['name']?>"></td>
-                <td class="row"><a href='details.php?id=<?= $row['id'] ?>'>
+                <td class="row"><a href='showAlbum.php?name=<?= $row['name']?>&id=<?= $row['id']?>'>
                         <?= $row['name'] ?></a></td>
                 <td class="row"><?= $row['artist'] ?></td>
                 <td class="row"><?= $row['album_type'] ?></td>
@@ -58,7 +59,7 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
         </tbody>
     </table>
     <div class="buttonIndex">
-        <button type="submit" class="btn btn-success " onclick="location ='add.php '">Add</button>
+        <button type="submit" class="btn btn-success " onclick="location ='addAlbum.php '">Add</button>
     </div>
 </div><!-- /.container -->
 </body>
