@@ -113,7 +113,7 @@ if (!empty($_POST)) {
             'rating' => $track['rating']
 
         ]);
-        header('Location: index.php');
+        header('Location: ');
     } else {
         $error = true;
     }
@@ -147,7 +147,7 @@ $error = !empty($errors) ? true : false;
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="h2"><a href="index.php">ATuns</a></li>
+                    <li class="h2"><a href="/">ATuns</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

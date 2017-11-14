@@ -71,39 +71,39 @@ CREATE TABLE atuns.albums
 
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track01',
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track01',
     'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
                       'track02', 'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
    NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track03',
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track03',
     'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
                       'track04', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
    NULL, NULL, NULL, NULL);
 
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track05',
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track05',
     'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
                       'track06', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
    NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost', 'track07',
+  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track07',
     'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO atuns.tracks (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
 VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'bsoses', 'ost',
+  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
                       'track08', 'hans', 'c:', '5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
    NULL, NULL, NULL, NULL);
 

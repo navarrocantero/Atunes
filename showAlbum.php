@@ -8,7 +8,7 @@ $id = $_REQUEST['id'];
 
 
 
-$sql = " select * from tracks where album = :name";
+$sql = "select * from tracks where tracks.album = :name";
 $queryResult = $pdo->prepare($sql);
 $queryResult->execute([
     'name' => $name
@@ -39,7 +39,7 @@ $queryResult->execute([
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="h2"><a href="index.php">ATuns</a></li>
+                    <li class="h2"><a href="/">ATuns</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -60,7 +60,7 @@ $queryResult->execute([
         <tbody>
         <?php while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
-                <td class="row"><a href='details.php?id=<?= $row['id'] ?>'>
+                <td class="row"><a href='?route=details&id=<?= $row['id'] ?>'>
                         <?= $row['name'] ?></a></td>
                 <td class="row"><?= $row['artist'] ?></td>
                 <td class="row"><?= $row['album'] ?></td>
@@ -71,7 +71,7 @@ $queryResult->execute([
         </tbody>
     </table>
     <div class="buttonIndex">
-        <button type="submit" class="btn btn-success " onclick="location ='addTrack.php '">Add</button>
+        <button type="submit" class="btn btn-success " onclick="location ='?route=addTrack '">Add</button>
     </div>
 </div><!-- /.container -->
 </body>

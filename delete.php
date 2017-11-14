@@ -6,4 +6,4 @@ $id = $_REQUEST['id'];
 $sql = "DELETE FROM tracks WHERE id = :id";
 $result = $pdo->prepare($sql);
 $result->execute(['id' => $id]);
-header("Location: index.php");
+header("/public");

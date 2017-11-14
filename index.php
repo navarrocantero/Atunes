@@ -29,9 +29,9 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="h2"><a href="index.php">ATuns</a></li>
+                    <li class="h2"><a href=" ">ATuns</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </nav>
 
@@ -50,7 +50,7 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
         <?php while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
               <td><img src="<?=$row['image']?>" alt="Logo de <?=$row['name']?>"></td>
-                <td class="row"><a href='showAlbum.php?name=<?= $row['name']?>&id=<?= $row['id']?>'>
+                <td class="row"><a href='?route=showAlbum&id=<?=$row['id']?>&name=<?=$row['name']?>'>
                         <?= $row['name'] ?></a></td>
                 <td class="row"><?= $row['artist'] ?></td>
                 <td class="row"><?= $row['album_type'] ?></td>
@@ -59,7 +59,7 @@ $queryResult = $pdo->query("SELECT * from  albums  ");
         </tbody>
     </table>
     <div class="buttonIndex">
-        <button type="submit" class="btn btn-success " onclick="location ='addAlbum.php '">Add</button>
+        <button type="submit" class="btn btn-success " onclick="location ='?route=addAlbum'">Add</button>
     </div>
 </div><!-- /.container -->
 </body>

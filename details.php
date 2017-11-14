@@ -143,7 +143,7 @@ $error = !empty($errors) ? false : $track;
             <div id="navbar" class="collapse navbar-collapse">
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="h2"><a href="index.php">ATuns</a></li>
+                        <li class="h2"><a href="/">ATuns</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -344,7 +344,7 @@ $error = !empty($errors) ? false : $track;
         <?php endif; ?>
 
         <div class="buttons">
-            <a href="delete.php?id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
+            <a href="?route=delete&id=<?= $track['id'] ?>" class="btn btn-danger ">Delete</a>
 
             <input type="hidden" name="id" value="<?= $track['id'] ?>">
             <button type="submit" class="btn btn-success">Save</button>

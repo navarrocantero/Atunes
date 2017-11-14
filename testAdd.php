@@ -44,8 +44,8 @@ $error = !empty($errors) ? true : false;
 <head>
     <meta charset="utf-8">
     <title>Atunes</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="public/css/bootstrap.css"/>
+    <link rel="stylesheet" href="public/css/app.css"/>
     <script src="js/bootstrap.js"></script>
 </head>
 <body>
