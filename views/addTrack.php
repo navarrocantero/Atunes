@@ -1,8 +1,4 @@
 <?php
-include_once 'config.php';
-include_once 'connectdb.php';
-include_once 'helpers.php';
-include_once 'dbhelper.php';
 
 $errors = array();
 $error = false;
