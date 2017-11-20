@@ -30,7 +30,6 @@
     </nav>
 
     <h1>Details of : </h1>
-
     <form action="" method="post">
 
         <div class="form-group<?php echo(isset($errors['name']['required']) ? " has-error" : ""); ?>">

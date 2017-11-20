@@ -46,6 +46,22 @@ $router->get('/', function () use ($pdo) {
     return render('../views/home.php', ['albums' => $albums]);
 });
 
+
+//Show Album
+$router->get('/showAlbum', function () use ($pdo) {
+
+    $name = htmlspecialchars($_REQUEST['name']);
+    $id = $_REQUEST['id'];
+    $sql = "select * from tracks where tracks.album = :name";
+    $queryResult = $pdo->prepare($sql);
+    $queryResult->execute([
+        'name' => $name
+    ]);
+    return render('../views/showAlbum.php', [
+        'queryResult' => $queryResult
+    ]);
+});
+
 //Add Album
 $router->post('/addAlbum', function () use ($pdo) {
     $errors = array();
@@ -117,107 +133,197 @@ $router->get('addAlbum', function () use ($pdo) {
     ]);
 });
 
-//Show Album
-$router->get('/showAlbum', function () use ($pdo) {
+//Add track
+$router->get('/addTrack', function () use ($pdo) {
+    $errors = array();
+    $error = false;
 
-    $name = htmlspecialchars($_REQUEST['name']);
-    $id = $_REQUEST['id'];
-    $sql = "select * from tracks where tracks.album = :name";
-    $queryResult = $pdo->prepare($sql);
-    $queryResult->execute([
-        'name' => $name
-    ]);
-    return render('../views/showAlbum.php', [
-        'queryResult' => $queryResult
-    ]);
-});
-
-//Show Track
-$router->get('showTrack', function () use ($pdo) {
-    $id = $_REQUEST['id'];
     $track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date", "play_date_utc",
         "persistent_id", "track_type", "file_folder_count", "album", "genre", "location", "name", "artist", "rating"],
         "");
-    $track = getSqlResult($id, $pdo);
 
-
-    return render('../views/showTrack.php',
-        $track);
+    return render('../views/addTrack.php', [
+        'track' => $track,
+        'errors' => $errors
+    ]);
 });
 
+
+$router->post('/addTrack', function () use ($pdo) {
+    $errors = array();
+    $error = false;
+
+    $track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date", "play_date_utc",
+        "persistent_id", "track_type", "file_folder_count", "album", "genre", "location", "name", "artist", "rating"],
+        "");
+    if (!empty($_POST)) {
+
+        $track['name'] = htmlspecialchars(trim($_POST['name']));
+        $track['size'] = htmlspecialchars(trim($_POST['size']));
+        $track['total_time'] = htmlspecialchars(trim($_POST['total_time']));
+        $track['date_added'] = htmlspecialchars(trim($_POST['date_added']));
+        $track['play_date'] = htmlspecialchars(trim($_POST['play_date']));
+        $track['play_date_utc'] = htmlspecialchars(trim($_POST['play_date_utc']));
+        $track['persistent_id'] = htmlspecialchars(trim($_POST['persistent_id']));
+        $track['track_type'] = htmlspecialchars(trim($_POST['track_type']));
+        $track['file_folder_count'] = htmlspecialchars(trim($_POST['file_folder_count']));
+        $track['album'] = htmlspecialchars(trim($_POST['album']));
+        $track['genre'] = htmlspecialchars(trim($_POST['genre']));
+        $track['location'] = htmlspecialchars(trim($_POST['location']));
+        $track['artist'] = htmlspecialchars(trim($_POST['artist']));
+        $track['rating'] = htmlspecialchars(trim($_POST['rating']));
+
+        if (($track['name']) == "") {
+            $errors['name']['required'] = "El campo nombre es requeridoº";
+        }
+
+        if (($track['artist']) == "") {
+            $errors['artist']['required'] = "El campo artista es requerido";
+        }
+
+        if (($track['rating']) == "") {
+            $errors['rating']['required'] = "El campo rating es requerido";
+        }
+
+
+        if (((int)(($track['rating'])) > 5) || (int)(($track['rating'])) < 0) {
+            $errors['rating']['required'] = "Rating debe estar entre 0 y 5";
+        }
+
+        if (($track['size']) == "") {
+            $errors['size']['required'] = "El campo size es requerido";
+        }
+        if (($track['total_time']) == "") {
+            $errors['total_time']['required'] = "El campo total_time es requerido";
+        }
+        if (($track['date_added']) == "") {
+            $errors['date_added']['required'] = "El campo date_added es requerido";
+        }
+        if (($track['play_date']) == "") {
+            $errors['play_date']['required'] = "El campo play_date es requerido";
+        }
+        if (($track['play_date_utc']) == "") {
+            $errors['play_date_utc']['required'] = "El campo play_date_utc es requerido";
+        }
+        if (($track['persistent_id']) == "") {
+            $errors['persistent_id']['required'] = "El campo persistent_id es requerido";
+        }
+        if (($track['track_type']) == "") {
+            $errors['track_type']['required'] = "El campo track_type es requerido";
+        }
+        if (($track['file_folder_count']) == "") {
+            $errors['file_folder_count']['required'] = "El campo file_folder_count es requerido";
+        }
+        if (($track['album']) == "") {
+            $errors['album']['required'] = "El campo album es requerido";
+        }
+        if (($track['genre']) == "") {
+            $errors['genre']['required'] = "El campo genre es requerido";
+        }
+        if (($track['location']) == "") {
+            $errors['location']['required'] = "El campo location es requerido";
+        }
+
+
+        if (empty($errors)) {
+
+            // Si no tengo errores de validación
+            // Guardo en la BD
+
+            $sql = "Insert into tracks
+    (name, artist, size, total_time, date_added, play_date,
+    play_date_utc ,persistent_id ,track_type , file_folder_count,
+    album,genre,location,rating) 
+    VALUES
+    (:name, :artist, :size, :total_time, :date_added, :play_date,
+    :play_date_utc, :persistent_id, :track_type,
+    :file_folder_count, :album, :genre, :location ,:rating)";
+
+            $result = $pdo->prepare($sql);
+            $result->execute([
+
+                'name' => $track['name'],
+                'artist' => $track['artist'],
+                'size' => $track['size'],
+                'total_time' => $track['total_time'],
+                'date_added' => $track['date_added'],
+                'play_date' => $track['play_date'],
+                'play_date_utc' => $track['play_date_utc'],
+                'persistent_id' => $track['persistent_id'],
+                'track_type' => $track['track_type'],
+                'file_folder_count' => $track['file_folder_count'],
+                'album' => $track['album'],
+                'genre' => $track['genre'],
+                'location' => $track['location'],
+                'rating' => $track['rating']
+
+            ]);
+            header("Location: " . BASE_URL);
+        } else {
+            $error = true;
+        }
+    }
+
+    return render('../views/addTrack.php', [
+        'track' => $track,
+        'errors' => $errors
+    ]);
+});
+
+
+//Show Track
 $router->post('showTrack', function () use ($pdo) {
     $id = $_REQUEST['id'];
     $errors = array();
-    $error = false;
-    $track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date", "play_date_utc",
-        "persistent_id", "track_type", "file_folder_count", "album", "genre", "location", "name", "artist", "rating"],
-        "");
     $track = getSqlResult($id, $pdo);
 
-//    if (!empty($_POST)) {
-//
-//        $track['name'] = htmlspecialchars(trim($_POST['name']));
-//        $track['size'] = htmlspecialchars(trim($_POST['size']));
-//        $track['total_time'] = htmlspecialchars(trim($_POST['total_time']));
-//        $track['date_added'] = htmlspecialchars(trim($_POST['date_added']));
-//        $track['play_date'] = htmlspecialchars(trim($_POST['play_date']));
-//        $track['play_date_utc'] = htmlspecialchars(trim($_POST['play_date_utc']));
-//        $track['persistent_id'] = htmlspecialchars(trim($_POST['persistent_id']));
-//        $track['track_type'] = htmlspecialchars(trim($_POST['track_type']));
-//        $track['file_folder_count'] = htmlspecialchars(trim($_POST['file_folder_count']));
-//        $track['album'] = htmlspecialchars(trim($_POST['album']));
-//        $track['genre'] = htmlspecialchars(trim($_POST['genre']));
-//        $track['location'] = htmlspecialchars(trim($_POST['location']));
-//        $track['artist'] = htmlspecialchars(trim($_POST['artist']));
-//        $track['rating'] = htmlspecialchars(trim($_POST['rating']));
-//
-//        if (($track['name']) == "") {
-//            $errors['name']['required'] = "El campo nombre es requeridoº";
-//        }
-//        if (($track['artist']) == "") {
-//            $errors['artist']['required'] = "El campo artista es requerido";
-//        }
-//        if (($track['rating']) == "") {
-//            $errors['rating']['required'] = "El campo rating es requerido";
-//        }
-//        if (((int)(($track['rating'])) > 5) || (int)(($track['rating'])) < 0) {
-//            $errors['rating']['required'] = "Rating debe estar entre 0 y 5";
-//        }
-//        if (($track['size']) == "") {
-//            $errors['size']['required'] = "El campo size es requerido";
-//        }
-//        if (($track['total_time']) == "") {
-//            $errors['total_time']['required'] = "El campo total_time es requerido";
-//        }
-//        if (($track['date_added']) == "") {
-//            $errors['date_added']['required'] = "El campo date_added es requerido";
-//        }
-//        if (($track['play_date']) == "") {
-//            $errors['play_date']['required'] = "El campo play_date es requerido";
-//        }
-//        if (($track['play_date_utc']) == "") {
-//            $errors['play_date_utc']['required'] = "El campo play_date_utc es requerido";
-//        }
-//        if (($track['persistent_id']) == "") {
-//            $errors['persistent_id']['required'] = "El campo persistent_id es requerido";
-//        }
-//        if (($track['track_type']) == "") {
-//            $errors['track_type']['required'] = "El campo track_type es requerido";
-//        }
-//        if (($track['file_folder_count']) == "") {
-//            $errors['file_folder_count']['required'] = "El campo file_folder_count es requerido";
-//        }
-//        if (($track['album']) == "") {
-//            $errors['album']['required'] = "El campo album es requerido";
-//        }
-//        if (($track['genre']) == "") {
-//            $errors['genre']['required'] = "El campo genre es requerido";
-//        }
-//        if (($track['location']) == "") {
-//            $errors['location']['required'] = "El campo location es requerido";
-//        }
-//
-//
+    if (($track['name']) == "") {
+        $errors['name']['required'] = "El campo nombre es requeridoº";
+    }
+    if (($track['artist']) == "") {
+        $errors['artist']['required'] = "El campo artista es requerido";
+    }
+    if (($track['rating']) == "") {
+        $errors['rating']['required'] = "El campo rating es requerido";
+    }
+    if (((int)(($track['rating'])) > 5) || (int)(($track['rating'])) < 0) {
+        $errors['rating']['required'] = "Rating debe estar entre 0 y 5";
+    }
+    if (($track['size']) == "") {
+        $errors['size']['required'] = "El campo size es requerido";
+    }
+    if (($track['total_time']) == "") {
+        $errors['total_time']['required'] = "El campo total_time es requerido";
+    }
+    if (($track['date_added']) == "") {
+        $errors['date_added']['required'] = "El campo date_added es requerido";
+    }
+    if (($track['play_date']) == "") {
+        $errors['play_date']['required'] = "El campo play_date es requerido";
+    }
+    if (($track['play_date_utc']) == "") {
+        $errors['play_date_utc']['required'] = "El campo play_date_utc es requerido";
+    }
+    if (($track['persistent_id']) == "") {
+        $errors['persistent_id']['required'] = "El campo persistent_id es requerido";
+    }
+    if (($track['track_type']) == "") {
+        $errors['track_type']['required'] = "El campo track_type es requerido";
+    }
+    if (($track['file_folder_count']) == "") {
+        $errors['file_folder_count']['required'] = "El campo file_folder_count es requerido";
+    }
+    if (($track['album']) == "") {
+        $errors['album']['required'] = "El campo album es requerido";
+    }
+    if (($track['genre']) == "") {
+        $errors['genre']['required'] = "El campo genre es requerido";
+    }
+    if (($track['location']) == "") {
+        $errors['location']['required'] = "El campo location es requerido";
+    }
+
+
 //        if (empty($errors)) {
 //
 //            // Si no tengo errores de validación
@@ -251,13 +357,25 @@ $router->post('showTrack', function () use ($pdo) {
 //            $error = true;
 //        }
 //    }
-    $error = !empty($errors) ? false : $track;
+
+    return render('../views/showTrack.php',
+        $track, $errors);
+});
+
+$router->get('showTrack', function () use ($pdo) {
+    $id = $_REQUEST['id'];
+    $errors = array();
+    $error = false;
+    $track = array_fill_keys(["name", "size", "total_time", "date_added", "play_date", "play_date_utc",
+        "persistent_id", "track_type", "file_folder_count", "album", "genre", "location", "name", "artist", "rating"],
+        "");
+    $track = getSqlResult($id, $pdo);
 
     return render('../views/showTrack.php',
         $track);
 });
 
-
+//Delete
 $router->get('/delete', function () use ($pdo) {
     $id = $_REQUEST['id'];
 
