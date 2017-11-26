@@ -1,9 +1,9 @@
 <?php
 
-//$server = 'sql11.freemysqlhosting.net';
-//$database = 'sql11204949';
-//$user = 'sql11204949';
-//$pass = 'ggeFbqBvpQ';
+//$server = '146.185.154.33';
+//$database = 'atuns';
+//$user = 'manolito';
+//$pass = 'localhost';
 
 //  local
     $server = 'localhost';

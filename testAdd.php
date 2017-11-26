@@ -31,7 +31,7 @@ if (!empty($_POST)) {
         $result->execute([
             'name' => $track['name'],
         ]);
-        header('Location: home.php');
+        header('Location: home.twig');
     } else {
         $error = true;
     }
@@ -65,7 +65,7 @@ $error = !empty($errors) ? true : false;
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="h2"><a href="views/home.php">Tracks</a></li>
+                    <li class="h2"><a href="views/home.twig">Tracks</a></li>
                     <li class="h2"><a href="albums.php">Albums</a></li>
                     <li class="h2"><a href="views/addTrack.php">Artists</a></li>
                 </ul>
