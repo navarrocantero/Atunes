@@ -12,7 +12,7 @@ class AlbumController extends BaseController
 {
 
     public function getAdd(){
-        return "ok";
+        return "añadir";
     }
 
     public function getAlbum(){

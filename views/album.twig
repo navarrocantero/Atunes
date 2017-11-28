@@ -24,7 +24,7 @@
         </tbody>
     </table>
     <div class="buttonIndex">
-        <form action="/album/add " method="POST">
+        <form action="{{ tracks[0].album }}/add" method="POST">
             <input type="hidden" name ="album" value="{{ tracks[0].album }}">
             <input type="hidden" name="_method" value="album">
             <button type="submit" class="btn btn-success "> Add </button>

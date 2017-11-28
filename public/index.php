@@ -30,10 +30,12 @@ function render($fileName, $params = [])
     return ob_get_clean(); // Se trae los datos del buffer interno y lo limpia
 }
 $router = new RouteCollector();
-
+$regEx = ("/([A-Z)|(%))\s])\w+/g/");
+//dameDato(mb_ereg($regEx, "jose"));
+mb_ereg($regEx, "jose");
 $router->controller('/', App\Controllers\HomeController::class);
 $router->controller('/album', App\Controllers\AlbumController::class);
-$router->controller('/album/add/', App\Controllers\AlbumController::class);
+
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 $method = $_REQUEST['_method'] ?? $_SERVER['REQUEST_METHOD'];
