@@ -11,14 +11,20 @@ namespace App\Controllers;
 class AlbumController extends BaseController
 {
 
+    public function getAdd(){
+        return "ok";
+    }
 
     public function getAlbum(){
-
         // Recuperar datos
         $query = $this->pdo->query("SELECT * from  albums");
         $query->execute();
         $tracks = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $this->render('album.twig',['tracks'=>$tracks]);
+    }
+
+    public function postAlbum(){
+        return "ok";
     }
 
     public function getIndex($name = null)
@@ -38,6 +44,5 @@ class AlbumController extends BaseController
             return $this->render('album.twig',['tracks'=>$tracks]);
         }
     }
-
 
 }

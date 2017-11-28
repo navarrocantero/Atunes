@@ -33,6 +33,7 @@ $router = new RouteCollector();
 
 $router->controller('/', App\Controllers\HomeController::class);
 $router->controller('/album', App\Controllers\AlbumController::class);
+$router->controller('/album/add/', App\Controllers\AlbumController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 $method = $_REQUEST['_method'] ?? $_SERVER['REQUEST_METHOD'];
