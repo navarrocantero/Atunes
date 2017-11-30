@@ -1,0 +1,59 @@
+{% extends 'headerLayout.twig' %}
+{% block content %}
+    <div class="container">
+        <form action="{{ 'album/add' | url }}" method="post">
+            <div class="form-group {% if errors['name'] %}has-error{% endif %}">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Album's name" value=""/>
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+        </form>
+    </div><!-- /.container -->
+{% endblock %}
+
+    {#<?php if (isset($errors['name'])): ?>#}
+    {#<div class="alert alert-danger alert-dismissible" role="alert">#}
+    {#<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>#}
+    {#</button>#}
+    {#<strong><?= $errors['name']['required'] ?></strong>#}
+    {#</div>#}
+    {#<?php endif; ?>#}
+
+    {#<div class="form-group<?php echo(isset($errors['artist']['required']) ? " has-error" : ""); ?>">#}
+    {#<label for="artist">Artist</label>#}
+    {#<input type="text" class="form-control" id="artist" name="artist" placeholder="Artist name"#}
+    {#value="<?= (isset($album['artist']) ? $album['artist'] : "") ?>">#}
+    {#</div>#}
+    {#<?php if (isset($errors['artist'])): ?>#}
+    {#<div class="alert alert-danger alert-dismissible" role="alert">#}
+    {#<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>#}
+    {#</button>#}
+    {#<strong><?= $errors['artist']['required'] ?></strong>#}
+    {#</div>#}
+    {#<?php endif; ?>#}
+
+    {#<div class="form-group<?php echo(isset($errors['image']['required']) ? " has-error" : ""); ?>">#}
+    {#<label for="image">Image</label>#}
+    {#<input type="text" class="form-control" id="artist" name="image" placeholder="Image url"#}
+    {#value="<?= (isset($album['image']) ? $album['image'] : "") ?>">#}
+    {#</div>#}
+    {#<?php if (isset($errors['image'])): ?>#}
+    {#<div class="alert alert-danger alert-dismissible" role="alert">#}
+    {#<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>#}
+    {#</button>#}
+    {#<strong><?= $errors['image']['required'] ?></strong>#}
+    {#</div>#}
+    {#<?php endif; ?>#}
+
+    {#<div class="form-group<?php echo(isset($errors['album_type']['required']) ? " has-error" : ""); ?>">#}
+    {#<label for="album_type">Album type</label>#}
+    {#<input type="text" class="form-control" id="album_type" name="album_type" placeholder="Album, colecction.."#}
+    {#value="<?= (isset($album['album_type']) ? $album['album_type'] : "") ?>">#}
+    {#</div>#}
+    {#<?php if (isset($errors['album_type'])): ?>#}
+    {#<div class="alert alert-danger alert-dismissible" role="alert">#}
+    {#<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>#}
+    {#</button>#}
+    {#<strong><?= $errors['album_type']['required'] ?></strong>#}
+    {#</div>#}
+    {#<?php endif; ?>#}

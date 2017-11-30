@@ -23,7 +23,7 @@
         </tbody>
     </table>
     <div class="buttonIndex">
-        <button type="submit" class="btn btn-success " onclick="location ='album/{{ album.name }}/add'">Add</button>
+        <a type="submit" class="btn btn-success " href="{{ 'album/add' | url }}">Add</a>
     </div>
 </div><!-- /.container -->
 {% endblock %}
