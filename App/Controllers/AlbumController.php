@@ -8,6 +8,9 @@
 
 namespace App\Controllers;
 
+use App\models\Album;
+use App\models\Track;
+
 class AlbumController extends BaseController
 {
 
@@ -19,42 +22,24 @@ class AlbumController extends BaseController
         }
         return "añadir";
     }
-
+//
     public function getAdd()
     {
         return $this->render('addAlbum.twig', []);
     }
 
-    public function getAlbum()
-    {
-        // Recuperar datos
-        $query = $this->pdo->query("SELECT * from  albums");
-        $query->execute();
-        $tracks = $query->fetchAll(\PDO::FETCH_ASSOC);
-        return $this->render('album.twig', ['tracks' => $tracks]);
-    }
-
-    public function deleteAlbum()
-    {
-        return null;
-    }
 
     // Ruta raiz
     public function getIndex($name = null)
     {
+
         if (is_null($name)) {
-            $query = $this->pdo->query("SELECT * from  albums");
-            $query->execute();
-            $albums = $query->fetchAll(\PDO::FETCH_ASSOC);
+            $albums = Album::all();
             return $this->render('home.twig', ['albums' => $albums]);
         } else {
             // Recuperar datos
-
-            $sql = "SELECT * from  tracks where album = :name";
-            $query = $this->pdo->prepare($sql);
-            $query->execute(['name' => $name]);
-            $tracks = $query->fetchAll(\PDO::FETCH_ASSOC);
-            return $this->render('album.twig', ['tracks' => $tracks]);
+            $album = Track::query()->where('album',$name )->get();
+            return $this->render('album.twig', ['album' => $album]);
         }
     }
 }

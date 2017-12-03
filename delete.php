@@ -1,6 +1,4 @@
 <?php
-include_once 'config.php';
-include_once 'connectdb.php';
 include_once 'helpers.php';
 $id = $_REQUEST['id'];
 $sql = "DELETE FROM tracks WHERE id = :id";
