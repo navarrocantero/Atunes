@@ -2,14 +2,77 @@
 {% block content %}
     <div class="container">
         <form action="{{ 'album/add' | url }}" method="post">
+
+            <div class="form-group {% if errors['image'] %}has-error{% endif %}">
+                <label for="image">Image</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="Album's image"
+                       value="{{ album.image }}"/>
+                {{ generateAlert(errors, 'image') }}
+            </div>
+
             <div class="form-group {% if errors['name'] %}has-error{% endif %}">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Album's name" value=""/>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Album's name"
+                       value="{{ album.name }}"/>
+                {{ generateAlert(errors, 'name') }}
             </div>
+
+
+            <div class="form-group {% if errors['artist'] %}has-error{% endif %}">
+                <label for="artist">Artist</label>
+                <input type="text" class="form-control" id="artist" name="artist" placeholder="Album's artist" value="{{ album.artist }}"/>
+                {{ generateAlert(errors, 'artist') }}
+            </div>
+
+            <div class="form-group {% if errors['type'] %}has-error{% endif %}">
+                <label for="album_type">Type</label>
+                <input type="text" class="form-control" id="album_type" name="album_type" placeholder="Album's type" value="{{ album.album_type }}"/>
+                {{ generateAlert(errors, 'album_type') }}
+            </div>
+
+
             <button type="submit" class="btn btn-success">Add</button>
         </form>
     </div><!-- /.container -->
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {#<?php if (isset($errors['name'])): ?>#}
     {#<div class="alert alert-danger alert-dismissible" role="alert">#}

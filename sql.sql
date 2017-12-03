@@ -49,7 +49,9 @@ CREATE TABLE atuns.track
   album_artist         TEXT,
   kind                 TEXT,
   library_folder_count VARCHAR(100),
-  sort_album_list      TEXT
+  sort_album_list      TEXT,
+    `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -61,7 +63,9 @@ CREATE TABLE atuns.album
     name text NOT NULL,
     artist text NOT NULL,
     image text,
-    album_type text
+    album_type text,
+      `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 );
 
 --
