@@ -47,13 +47,12 @@ class HomeController extends BaseController
             $user = User::query()->where('email', $_POST['inputEmail'])->first();
 //            $user =  User::where('email', $_POST['inputEmail']->first());
             if (password_verify($_POST['inputPassword'], $user->password)) {
-//                dameDato($user);
                 $_SESSION['userId'] = $user->id;
                 $_SESSION['userName'] = $user->name;
-                $_SESSION['userEmail'] = $user->email;
+                $_SESSION['userEmail'] = $user->email;      
 
-                header('location ' . BASE_URL);
-                return null;
+
+                header('Location: '. BASE_URL);
             }
             $validator->addMessage('authError', 'Incorrect data');
         }
