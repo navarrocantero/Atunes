@@ -8,8 +8,8 @@
 
 namespace App\Controllers;
 
-use App\models\Album;
-use App\models\Track;
+use App\Models\Album;
+use App\Models\Track;
 use Sirius\Validation\Validator;
 
 class AlbumController extends BaseController
