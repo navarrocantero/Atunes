@@ -130,6 +130,63 @@ class AlbumController extends BaseController
         }
     }
 
+    /**
+     * Path GET /album/edit to update all info about one album
+     * @return string Render with all web's info.
+     */
+    public function putEdit($id)
+    {
+        global $osTypeValues, $basedOnValues, $desktopValues, $originValues, $archValues, $categoryValues, $statusValues;
+
+        $errors = array();  // Array donde se guardaran los errores de validación
+
+        $webInfo = [
+            'h1' => 'Update Album',
+            'submit' => 'Update',
+            'method' => 'PUT'
+        ];
+
+        if (!empty($_POST)) {
+            // Validate NOT NULL fields
+            $validator = new Validator();
+
+            $requiredFieldMessageError = "The field {label} is required";
+
+            $validator->add('name', 'required',[], $requiredFieldMessageError);
+            $validator->add('artist', 'required', [],$requiredFieldMessageError);
+
+            // Extrct POST DATA
+            $album['id']=$id;
+            $album['name'] = htmlspecialchars(trim($_POST['name']));
+            $album['image'] = htmlspecialchars(trim($_POST['image']));
+            $album['artist'] = htmlspecialchars(trim($_POST['artist']));
+            $album['album_type'] = htmlspecialchars(trim($_POST['album_type']));
+
+            if ($validator->validate($_POST)) {
+                $album = Album::where('id', $id)->update([
+                    'name' => $album['name'],
+                    'image' => $album['image'],
+                    'artist' => $album['artist'],
+                    'album_type' => $album['album_type'],
+                ]);
+
+                // Si se guarda sin problemas se redirecciona la aplicación a la página de inicio
+                header('Location: ' . BASE_URL);
+            } else {
+                $errors = $validator->getMessages();
+            }
+        }
+        return $this->render('addAlbum.twig', [
+            'album' => album,
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
+
+    /**
+     * Path PUT /album/edit to update some fields about one album
+     * @return string Render with all web's info.
+     */
     public function getEdit($id)
     {
 
@@ -155,6 +212,9 @@ class AlbumController extends BaseController
         ]);
     }
 
+    /**
+     * Path DELETE /album to erase the album with the $ID
+     */
     public function deleteIndex()
     {
         $id = $_REQUEST['id'];
