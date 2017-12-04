@@ -15,6 +15,7 @@ use Sirius\Validation\Validator;
 class AlbumController extends BaseController
 {
 
+
     /**
      * Path GET /album/add shows a form to add new album
      * @return string Render with all web's info.
@@ -24,13 +25,14 @@ class AlbumController extends BaseController
         $errors = array();  // Array donde se guardaran los errores de validación
         $error = false;     // Será true si hay errores de validación.
 
+
+
+        $album = array_fill_keys(["name", "artist", "image", "'album_type"], "");
         $webInfo = [
             'h1' => 'Add Album',
             'submit' => 'Add',
             'method' => 'POST'
         ];
-
-        $album = array_fill_keys(["name", "artist", "image", "'album_type"], "");
         return $this->render('addAlbum.twig', [
             'album' => $album,
             'errors' => $errors,
@@ -80,7 +82,6 @@ class AlbumController extends BaseController
             } else {
                 $errors = $validator->getMessages();
             }
-
         }
         return $this->render('addAlbum.twig',[
             'album' => $album,
@@ -100,7 +101,7 @@ class AlbumController extends BaseController
     {
 
         $webInfo = [
-            'title' => 'Home - Atuns'
+            'title' => ' Atuns'
         ];
 
         if (is_null($name)) {
@@ -110,13 +111,20 @@ class AlbumController extends BaseController
                 'webInfo' => $webInfo
             ]);
         } else {
+
+            // Get all tracks by album name
+            $tracks = Track::query()->where('album', $name)->get();
+            //Get the album
+            $album = Album::query()->where('name', $name)->get();
+
             $webInfo = [
-                'title' => 'Página de Distro - DistroADA'
+                'title' => $tracks->get(0)['album'],
+                'artist' => $album->get(0)['artist'],
+                'image' => $album->get(0)['image']
+
             ];
-            // Recuperar datos
-            $album = Track::query()->where('album', $name)->get();
             return $this->render('album.twig', [
-                'album' => $album,
+                'tracks' => $tracks,
                 'webInfo' => $webInfo
             ]);
         }

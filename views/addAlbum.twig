@@ -20,13 +20,15 @@
 
             <div class="form-group {% if errors['artist'] %}has-error{% endif %}">
                 <label for="artist">Artist</label>
-                <input type="text" class="form-control" id="artist" name="artist" placeholder="Album's artist" value="{{ album.artist }}"/>
+                <input type="text" class="form-control" id="artist" name="artist" placeholder="Album's artist"
+                       value="{{ album.artist }}"/>
                 {{ generateAlert(errors, 'artist') }}
             </div>
 
             <div class="form-group {% if errors['type'] %}has-error{% endif %}">
                 <label for="album_type">Type</label>
-                <input type="text" class="form-control" id="album_type" name="album_type" placeholder="Album's type" value="{{ album.album_type }}"/>
+                <input type="text" class="form-control" id="album_type" name="album_type" placeholder="Album's type"
+                       value="{{ album.album_type }}"/>
                 {{ generateAlert(errors, 'album_type') }}
             </div>
 

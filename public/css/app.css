@@ -1,4 +1,4 @@
-body{
+body {
     padding-top: 100px;
     background-color: rgb(32, 32, 32);
     background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32));
@@ -8,12 +8,13 @@ body{
     color: white;
 }
 
-table{
+table, .header {
     background-color: white;
-     color: black;
+    color: black;
+    text-align: justify;
 }
 
-.buttons{
+.buttons {
     display: flex;
     justify-content: space-between;
 }
@@ -21,4 +22,25 @@ table{
 .buttonIndex {
     display: flex;
     flex-direction: row-reverse;
+}
+
+.h1{
+   text-align: justify;
+}
+
+.h2{
+
+    margin-top:10%;
+    text-align: center;
+    margin-left:1em;
+}
+
+.icon{
+    margin-top:10%;
+     max-width: 50%;
+}
+
+.header{
+    justify-content: space-between;
+    display: flex;
 }
