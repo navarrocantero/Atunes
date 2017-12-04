@@ -43,6 +43,7 @@ $router = new RouteCollector();
 
 $router->controller('/', App\Controllers\HomeController::class);
 $router->controller('/album', App\Controllers\AlbumController::class);
+$router->controller('/api', App\Controllers\ApiController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
