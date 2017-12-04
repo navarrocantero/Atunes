@@ -154,4 +154,13 @@ class AlbumController extends BaseController
             'webInfo' => $webInfo
         ]);
     }
+
+    public function deleteIndex()
+    {
+        $id = $_REQUEST['id'];
+
+        $album = Album::destroy($id);
+
+        header("Location: " . BASE_URL);
+    }
 }
