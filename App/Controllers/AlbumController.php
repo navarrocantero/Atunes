@@ -129,4 +129,29 @@ class AlbumController extends BaseController
             ]);
         }
     }
+
+    public function getEdit($id)
+    {
+
+        $errors = array();  // Array donde se guardaran los errores de validación
+
+        $webInfo = [
+            'h1' => 'Update album',
+            'submit' => 'Update',
+            'method' => 'PUT'
+        ];
+
+        // Recuperar datos
+        $album = Album::find($id);
+
+        if (!$album) {
+            header('Location: home.twig');
+        }
+
+        return $this->render('addAlbum.twig', [
+            'album' => $album,
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
 }
