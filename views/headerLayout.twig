@@ -2,12 +2,10 @@
 <head>
     <meta charset="utf-8">
     <title>{{ webinfo.title }}</title>
-
     <link rel="stylesheet" href="{{ '' | url }}css/bootstrap.css"/>
     <link rel="stylesheet" href="{{ '' | url }}css/app.css"/>
 </head>
 <body>
-
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -25,15 +23,13 @@
             <ul class="nav navbar-nav">
                 <li class="h2"><a href="/">ATuns</a></li>
                 <li><a href="{{ 'login' | url }}">Login</a></li>
-                <li><a href="{{ 'registro' | url }}">Register</a></li>
+                <li><a href="{{ 'register' | url }}">Register</a></li>
             </ul>
         </div>
     </div>
 </nav>
 {% block content %}
 {% endblock %}
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

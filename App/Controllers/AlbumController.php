@@ -90,7 +90,6 @@ class AlbumController extends BaseController
         ]);
     }
 
-
     /**
      * Path GET / Go to the app's home
      *

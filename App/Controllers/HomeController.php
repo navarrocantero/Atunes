@@ -38,9 +38,9 @@ class HomeController extends BaseController
         $errors = [];
         $validator = new Validator();
 
-        $validator->add('inputEmail:Email', 'email',[], 'Type a correct email format');
-        $validator->add('inputEmail:Email', 'required',[], 'The field {label} is required');
-        $validator->add('inputPassword:Password', 'required',[], 'The field {label} is required');
+        $validator->add('inputEmail:Email', 'email', [], 'Type a correct email format');
+        $validator->add('inputEmail:Email', 'required', [], 'The field {label} is required');
+        $validator->add('inputPassword:Password', 'required', [], 'The field {label} is required');
 
 
         if ($validator->validate($_POST)) {
@@ -49,10 +49,10 @@ class HomeController extends BaseController
             if (password_verify($_POST['inputPassword'], $user->password)) {
                 $_SESSION['userId'] = $user->id;
                 $_SESSION['userName'] = $user->name;
-                $_SESSION['userEmail'] = $user->email;      
+                $_SESSION['userEmail'] = $user->email;
 
 
-                header('Location: '. BASE_URL);
+                header('Location: ' . BASE_URL);
             }
             $validator->addMessage('authError', 'Incorrect data');
         }
@@ -60,46 +60,56 @@ class HomeController extends BaseController
         return $this->render('Auth/login.twig', ['errors' => $errors]);
     }
 
-    public function getRegistro(){
-        $webInfo=[
-            'title'=> "Register"
+    public function getRegister()
+    {
+        $webInfo = [
+            'title' => "Register"
         ];
-        return $this->render('auth/register.twig',['webInfo'=> $webInfo]);
+        return $this->render('auth/register.twig', ['webInfo' => $webInfo]);
     }
 
-    public function postRegistro(){
-        $webInfo=[
-            'title'=> "Register"
+    public function PostRegister()
+    {
+        $webInfo = [
+            'title' => "Register"
         ];
-        $errors = [];
+
         $validator = new Validator();
 
-        $validator->add('inputName:Nombre', 'required', [], 'The field {label} is required');
-        $validator->add('inputName:Nombre', 'minlength', ['min' => 5], 'The field {label} must have 5 charachters at least');
-        $validator->add('inputEmail:Email', 'required', [], 'The field {label} is required');
-        $validator->add('inputEmail:Email', 'email', [], 'Type a correct email format');
-        $validator->add('inputPassword1:Password', 'required', [], 'The field {label} is required');
-        $validator->add('inputPassword1:Password', 'minlength', ['min' => 8], 'The field {label} must have 8 charachters at least');
-        $validator->add('inputPassword2:Password', 'required', [], 'The field {label} is required');
-        $validator->add('inputPassword2:Password', 'match', 'inputPassword1', 'The passwords dont match');
+        $errors = [];
+        if (!empty($_POST)) {
+            $user['name'] = htmlspecialchars(trim($_POST['inputName']));
+            $user['email'] = htmlspecialchars(trim($_POST['inputEmail']));
 
-        if($validator->validate($_POST)){
-            $user = new User();
 
-            $user->name = $_POST['inputName'];
-            $user->email = $_POST['inputEmail'];
-            $user->password = password_hash($_POST['inputPassword1'], PASSWORD_DEFAULT);
+//            $user = new User();  ???
+            $validator->add('inputName:Nombre', 'required', [], 'The field {label} is required');
+            $validator->add('inputName:Nombre', 'minlength', ['min' => 5], 'The field {label} must have 5 charachters at least');
+            $validator->add('inputEmail:Email', 'required', [], 'The field {label} is required');
+            $validator->add('inputEmail:Email', 'email', [], 'Type a correct email format');
+            $validator->add('inputPassword1:Password', 'required', [], 'The field {label} is required');
+            $validator->add('inputPassword1:Password', 'minlength', ['min' => 8], 'The field {label} must have 8 charachters at least');
+            $validator->add('inputPassword2:Password', 'required', [], 'The field {label} is required');
+            $validator->add('inputPassword2:Password', 'match', 'inputPassword1', 'The passwords dont match');
 
-            $user->save();
+            if ($validator->validate($_POST)) {
 
-            header('Location: '.BASE_URL);
-        }else{
-            $errors = $validator->getMessages();
+                $user->name = $_POST['inputName'];
+                $user->email = $_POST['inputEmail'];
+                $user->password = password_hash($_POST['inputPassword1'], PASSWORD_DEFAULT);
+
+                $user->save();
+
+                header('Location: ' . BASE_URL);
+            } else {
+                $errors = $validator->getMessages();
+            }
+
+            return $this->render('auth/register.twig', [
+                'user' => $user,
+                'errors' => $errors,
+                'webInfo' => $webInfo
+            ]);
         }
-
-        return $this->render('auth/register.twig', [
-            'errors' => $errors,
-            'webInfo'=> $webInfo
-        ]);
     }
 }
