@@ -54,7 +54,7 @@ class HomeController extends BaseController
 
                 header('Location: ' . BASE_URL);
             }
-            $validator->addMessage('authError', 'Incorrect data');
+            $validator->addMessage('authError', 'User   or Pass are incorrect');
         }
         $errors = $validator->getMessages();
         return $this->render('Auth/login.twig', ['errors' => $errors]);
@@ -92,18 +92,14 @@ class HomeController extends BaseController
 
             if ($validator->validate($_POST)) {
                 $user = new User();
-
                 $user->name = $_POST['inputName'];
                 $user->email = $_POST['inputEmail'];
                 $user->password = password_hash($_POST['inputPassword1'], PASSWORD_DEFAULT);
-
                 $user->save();
-
                 header('Location: ' . BASE_URL);
             } else {
                 $errors = $validator->getMessages();
             }
-
             return $this->render('auth/register.twig', [
                 'user' => $user,
                 'errors' => $errors,
