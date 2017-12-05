@@ -81,8 +81,6 @@ class HomeController extends BaseController
             $user['name'] = htmlspecialchars(trim($_POST['inputName']));
             $user['email'] = htmlspecialchars(trim($_POST['inputEmail']));
 
-
-//            $user = new User();  ???
             $validator->add('inputName:Nombre', 'required', [], 'The field {label} is required');
             $validator->add('inputName:Nombre', 'minlength', ['min' => 5], 'The field {label} must have 5 charachters at least');
             $validator->add('inputEmail:Email', 'required', [], 'The field {label} is required');
@@ -93,6 +91,7 @@ class HomeController extends BaseController
             $validator->add('inputPassword2:Password', 'match', 'inputPassword1', 'The passwords dont match');
 
             if ($validator->validate($_POST)) {
+                $user = new User();
 
                 $user->name = $_POST['inputName'];
                 $user->email = $_POST['inputEmail'];
