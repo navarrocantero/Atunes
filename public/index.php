@@ -6,21 +6,25 @@
  * Time: 00:02
  */
 require_once '../vendor/autoload.php';
+include_once '../helpers.php';
+include_once '../dbhelper.php';
 
+session_start();
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
-include_once '../helpers.php';
-include_once '../dbhelper.php';
-
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
 define('BASE_URL', $baseUrl);
-if(file_exists(__DIR__.'/../.env')){
-$dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
-$dotEnv->load();
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
+    $dotEnv->load();
 }
+
+/**
+ * ELOQUENT
+ */
 $capsule = new Capsule;
 $capsule->addConnection([
     'driver' => 'mysql',
@@ -31,19 +35,55 @@ $capsule->addConnection([
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => ''
-
 ]);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+/**
+ * route is empty? route = /
+ */
 $route = $_GET['route'] ?? "/";
-
-
 $router = new RouteCollector();
 
-$router->controller('/', App\Controllers\HomeController::class);
-$router->controller('/album', App\Controllers\AlbumController::class);
-$router->controller('/api', App\Controllers\ApiController::class);
+
+// Filtro para aplicar a rutas a USUARIOS AUTENTICADOS
+// en el sistema
+$router->filter('auth', function(){
+    if(!isset($_SESSION['userId'])){
+        header('Location: '. BASE_URL);
+        return false;
+    }
+});
+$router->group(['before' => 'auth'], function ($router){
+
+    $router->get('/album/new', ['\App\Controllers\AlbumController', 'getAdd']);
+    $router->post('/album/new', ['\App\Controllers\AlbumController', 'postAdd']);
+    $router->get('/album/edit/{name}', ['\App\Controllers\DistrosController', 'getEdit']);
+    $router->put('/album/edit/{name}', ['\App\Controllers\DistrosController', 'putEdit']);
+//    $router->delete('/distros/', ['\App\Controllers\DistrosController', 'deleteIndex']);
+
+    $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
+});
+
+// Filtro para aplicar a rutas a USUARIOS NO AUTENTICADOS
+// en el sistema
+$router->filter('noAuth', function(){
+    if( isset($_SESSION['userId'])){
+        header('Location: '. BASE_URL);
+        return false;
+    }
+});
+$router->group(['before' => 'noAuth'], function ($router){
+    $router->get('/login', ['\App\Controllers\HomeController', 'getLogin']);
+    $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);
+    $router->get('/register', ['\App\Controllers\HomeController', 'getRegister']);
+    $router->post('/register', ['\App\Controllers\HomeController', 'postRegister']);
+});
+
+// Rutas sin filtros
+$router->get('/', ['\App\Controllers\HomeController', 'getIndex']);
+$router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']);
+
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
