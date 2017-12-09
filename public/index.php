@@ -7,7 +7,6 @@
  */
 require_once '../vendor/autoload.php';
 include_once '../helpers.php';
-include_once '../dbhelper.php';
 
 session_start();
 use Phroute\Phroute\RouteCollector;
@@ -56,12 +55,11 @@ $router->filter('auth', function(){
 });
 $router->group(['before' => 'auth'], function ($router){
 
-    $router->get('/album/new', ['\App\Controllers\AlbumController', 'getAdd']);
-    $router->post('/album/new', ['\App\Controllers\AlbumController', 'postAdd']);
-    $router->get('/album/edit/{name}', ['\App\Controllers\DistrosController', 'getEdit']);
-    $router->put('/album/edit/{name}', ['\App\Controllers\DistrosController', 'putEdit']);
-//    $router->delete('/distros/', ['\App\Controllers\DistrosController', 'deleteIndex']);
-
+    $router->get('/album/add', ['\App\Controllers\AlbumController', 'getAdd']);
+    $router->post('/album/add', ['\App\Controllers\AlbumController', 'postAdd']);
+    $router->get('/album/edit/{name}', ['\App\Controllers\AlbumController', 'getEdit']);
+    $router->put('/album/edit/{name}', ['\App\Controllers\AlbumController', 'putEdit']);
+    $router->delete('/album', ['\App\Controllers\AlbumController', 'deleteIndex']);
     $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
 });
 

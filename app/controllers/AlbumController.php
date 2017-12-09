@@ -26,7 +26,6 @@ class AlbumController extends BaseController
         $error = false;     // Será true si hay errores de validación.
 
 
-
         $album = array_fill_keys(["name", "artist", "image", "'album_type"], "");
         $webInfo = [
             'h1' => 'Add Album',
@@ -60,8 +59,8 @@ class AlbumController extends BaseController
 
             $requiredFieldMessageError = "The field {label} is required";
 
-            $validator->add('name', 'required',[], $requiredFieldMessageError);
-            $validator->add('artist', 'required', [],$requiredFieldMessageError);
+            $validator->add('name', 'required', [], $requiredFieldMessageError);
+            $validator->add('artist', 'required', [], $requiredFieldMessageError);
 
             // Extrct POST DATA
 
@@ -83,10 +82,10 @@ class AlbumController extends BaseController
                 $errors = $validator->getMessages();
             }
         }
-        return $this->render('addAlbum.twig',[
+        return $this->render('addAlbum.twig', [
             'album' => $album,
-            'errors'=> $errors,
-            'webInfo'=>$webInfo
+            'errors' => $errors,
+            'webInfo' => $webInfo
         ]);
     }
 
@@ -113,6 +112,7 @@ class AlbumController extends BaseController
 
             // Get all tracks by album name
             $tracks = Track::query()->where('album', $name)->get();
+
             //Get the album
             $album = Album::query()->where('name', $name)->get();
 
@@ -133,8 +133,9 @@ class AlbumController extends BaseController
      * Path GET /album/edit to update all info about one album
      * @return string Render with all web's info.
      */
-    public function putEdit($id)
+    public function putEdit($name)
     {
+
         global $osTypeValues, $basedOnValues, $desktopValues, $originValues, $archValues, $categoryValues, $statusValues;
 
         $errors = array();  // Array donde se guardaran los errores de validación
@@ -146,23 +147,26 @@ class AlbumController extends BaseController
         ];
 
         if (!empty($_POST)) {
+
+
             // Validate NOT NULL fields
             $validator = new Validator();
 
             $requiredFieldMessageError = "The field {label} is required";
 
-            $validator->add('name', 'required',[], $requiredFieldMessageError);
-            $validator->add('artist', 'required', [],$requiredFieldMessageError);
+            $validator->add('name', 'required', [], $requiredFieldMessageError);
+            $validator->add('artist', 'required', [], $requiredFieldMessageError);
 
             // Extrct POST DATA
-            $album['id']=$id;
+            $album['id'] = $name;
             $album['name'] = htmlspecialchars(trim($_POST['name']));
             $album['image'] = htmlspecialchars(trim($_POST['image']));
             $album['artist'] = htmlspecialchars(trim($_POST['artist']));
             $album['album_type'] = htmlspecialchars(trim($_POST['album_type']));
 
             if ($validator->validate($_POST)) {
-                $album = Album::where('id', $id)->update([
+
+                $album = Album::where('name', $name)->update([
                     'name' => $album['name'],
                     'image' => $album['image'],
                     'artist' => $album['artist'],
@@ -186,7 +190,7 @@ class AlbumController extends BaseController
      * Path PUT /album/edit to update some fields about one album
      * @return string Render with all web's info.
      */
-    public function getEdit($id)
+    public function getEdit($name)
     {
 
         $errors = array();  // Array donde se guardaran los errores de validación
@@ -198,14 +202,14 @@ class AlbumController extends BaseController
         ];
 
         // Recuperar datos
-        $album = Album::find($id);
+        $album = Album::query()->where('name', $name)->get();
 
         if (!$album) {
             header('Location: home.twig');
         }
 
         return $this->render('addAlbum.twig', [
-            'album' => $album,
+            'album' => $album->get(0),
             'errors' => $errors,
             'webInfo' => $webInfo
         ]);
