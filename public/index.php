@@ -14,7 +14,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-$baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
+$baseUrl = "https://" . $_SERVER['HTTP_HOST'] . $baseDir;
 define('BASE_URL', $baseUrl);
 if (file_exists(__DIR__ . '/../.env')) {
     $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
@@ -80,8 +80,9 @@ $router->group(['before' => 'noAuth'], function ($router){
 
 // Rutas sin filtros
 $router->get('/', ['\App\Controllers\HomeController', 'getIndex']);
-$router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']);
-
+$router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']); 
+$router->get('/api/{name}', ['\App\Controllers\ApiController', 'getAlbum']);
+$router->get('/api', ['\App\Controllers\ApiController', 'getAlbums']);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
