@@ -52,7 +52,7 @@ class AuthController extends BaseController
             $validator->addMessage('authError', 'User   or Pass are incorrect');
         }
         $errors = $validator->getMessages();
-        return $this->render('Auth/login.twig', ['errors' => $errors]);
+        return $this->render('auth/login.twig', ['errors' => $errors]);
     }
 
     public function getLogout()

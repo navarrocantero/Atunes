@@ -80,7 +80,7 @@ $router->group(['before' => 'noAuth'], function ($router){
 
 // Rutas sin filtros
 $router->get('/', ['\App\Controllers\HomeController', 'getIndex']);
-$router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']); 
+$router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']);
 $router->get('/api/{name}', ['\App\Controllers\ApiController', 'getAlbum']);
 $router->get('/api', ['\App\Controllers\ApiController', 'getAlbums']);
 
