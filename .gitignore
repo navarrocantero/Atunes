@@ -1,6 +1,6 @@
 .env
 # Created by https://www.gitignore.io/api/phpstorm,composer,jetbrains
-
+.idea/
 ### Composer ###
 composer.phar
 /vendor/
