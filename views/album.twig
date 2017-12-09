@@ -5,7 +5,10 @@
             <div class="row">
                 <h1 class="h2">{{ webInfo.title }}</h1>
 
-                <h1 class="h2">{{ webInfo.artist }}</h1>
+                <h2 class="h2">{{ tracks[0].artist }}</h2>
+
+                <h2 class="h2">{{ tracks[0].genre }}</h2>
+
             </div>
             <div class="row">
                 <img class="icon" src="{{ webInfo.image }}" alt="Logo de {{ webInfo.image }}">
@@ -14,17 +17,16 @@
 
         <table class="table table-hover">
             <thead>
-
             <tr>
                 <th>Name</th>
                 <th>Rating</th>
-                <th>Genre</th>
+                <th>Bpm</th>
             </tr>
             </thead>
             <tbody>
             {% for track in tracks %}
                 <tr>
-                    <td class="row">{{ track.name }}</td>
+                    <td class="row"><a href="/album/{{ tracks[0].album }}/track/{{ track.name }}"> {{ track.name }}</a></td>
                     <td class="row">{{ track.rating }}</td>
                     <td class="row">{{ track.genre }}</td>
                 </tr>

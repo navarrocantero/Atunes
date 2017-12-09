@@ -14,8 +14,6 @@ use Sirius\Validation\Validator;
 
 class AlbumController extends BaseController
 {
-
-
     /**
      * Path GET /album/add shows a form to add new album
      * @return string Render with all web's info.
@@ -59,8 +57,8 @@ class AlbumController extends BaseController
 
             $requiredFieldMessageError = "The field {label} is required";
 
-            $validator->add('name', 'required', [], $requiredFieldMessageError);
-            $validator->add('artist', 'required', [], $requiredFieldMessageError);
+            $validator->add('name:Name', 'required', [], $requiredFieldMessageError);
+            $validator->add('artist:Artist', 'required', [], $requiredFieldMessageError);
 
             // Extrct POST DATA
 
@@ -130,16 +128,38 @@ class AlbumController extends BaseController
     }
 
     /**
+     * Path PUT /album/edit to update some fields about one album
+     * @return string Render with all web's info.
+     */
+    public function getEdit($name)
+    {
+        $errors = array();  // Array donde se guardaran los errores de validación
+        $webInfo = [
+            'h1' => 'Update album',
+            'submit' => 'Update',
+            'method' => 'PUT'
+        ];
+        // Recuperar datos
+        $album = Album::query()->where('name', $name)->get();
+        if (!$album) {
+            header('Location: home.twig');
+        }
+
+        return $this->render('addAlbum.twig', [
+            'album' => $album->get(0),
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
+
+    /**
      * Path GET /album/edit to update all info about one album
      * @return string Render with all web's info.
      */
     public function putEdit($name)
     {
 
-        global $osTypeValues, $basedOnValues, $desktopValues, $originValues, $archValues, $categoryValues, $statusValues;
-
         $errors = array();  // Array donde se guardaran los errores de validación
-
         $webInfo = [
             'h1' => 'Update Album',
             'submit' => 'Update',
@@ -147,32 +167,28 @@ class AlbumController extends BaseController
         ];
 
         if (!empty($_POST)) {
-
+            $album = (Album::where('name', $name)->get()[0]);
 
             // Validate NOT NULL fields
             $validator = new Validator();
-
             $requiredFieldMessageError = "The field {label} is required";
-
-            $validator->add('name', 'required', [], $requiredFieldMessageError);
-            $validator->add('artist', 'required', [], $requiredFieldMessageError);
+            $validator->add('name:Name', 'required', [], $requiredFieldMessageError);
+            $validator->add('artist:Artist', 'required', [], $requiredFieldMessageError);
 
             // Extrct POST DATA
-            $album['id'] = $name;
             $album['name'] = htmlspecialchars(trim($_POST['name']));
             $album['image'] = htmlspecialchars(trim($_POST['image']));
             $album['artist'] = htmlspecialchars(trim($_POST['artist']));
             $album['album_type'] = htmlspecialchars(trim($_POST['album_type']));
 
-            if ($validator->validate($_POST)) {
-
-                $album = Album::where('name', $name)->update([
+            if ($validator->validate($album)) {
+                $album = Album::where('id', $album['id'])->update([
+                    'id' => $album['id'],
                     'name' => $album['name'],
                     'image' => $album['image'],
                     'artist' => $album['artist'],
-                    'album_type' => $album['album_type'],
+                    'album_type' => $album['album_type']
                 ]);
-
                 // Si se guarda sin problemas se redirecciona la aplicación a la página de inicio
                 header('Location: ' . BASE_URL);
             } else {
@@ -180,36 +196,7 @@ class AlbumController extends BaseController
             }
         }
         return $this->render('addAlbum.twig', [
-            'album' => album,
-            'errors' => $errors,
-            'webInfo' => $webInfo
-        ]);
-    }
-
-    /**
-     * Path PUT /album/edit to update some fields about one album
-     * @return string Render with all web's info.
-     */
-    public function getEdit($name)
-    {
-
-        $errors = array();  // Array donde se guardaran los errores de validación
-
-        $webInfo = [
-            'h1' => 'Update album',
-            'submit' => 'Update',
-            'method' => 'PUT'
-        ];
-
-        // Recuperar datos
-        $album = Album::query()->where('name', $name)->get();
-
-        if (!$album) {
-            header('Location: home.twig');
-        }
-
-        return $this->render('addAlbum.twig', [
-            'album' => $album->get(0),
+            'album' => $album,
             'errors' => $errors,
             'webInfo' => $webInfo
         ]);

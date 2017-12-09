@@ -1,0 +1,83 @@
+{% extends 'headerLayout.twig' %}
+{% block content %}
+    <div class="container">
+        <h1>{{ webInfo.h1 }}</h1>
+        <form method="post">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group  {% if errors['name'] %}has-error{% endif %}">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Track's Name"
+                               value="{{ album.name }}">
+                    </div>
+                    {{ generateAlert(errors, 'name') }}
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group  {% if errors['album'] %}has-error{% endif %}">
+                        <label for="inputAlbum">Album</label>
+                        <input type="text" class="form-control" id="album" name="album" placeholder="Album name"
+                               value="{{ album.album }}">
+                    </div>
+                    {{ generateAlert(errors, 'album') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group  {% if errors['genre'] %}has-error{% endif %}">
+                        <label for="inputGenre">Genre</label>
+                        <input type="text" class="form-control" id="genre" name="genre" placeholder="Track's Genre"
+                               value="{{ album.genre }}">
+                    </div>
+                    {{ generateAlert(errors, 'genre') }}
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group  {% if errors['artist'] %}has-error{% endif %}">
+                        <label for="intputAlbum">Artist</label>
+                        <input type="text" class="form-control" id="artist" name="artist" placeholder="Track's Artist"
+                               value="{{ album.artist }}">
+                    </div>
+                    {{ generateAlert(errors, 'artist') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <label for="inputTrackNumber">Track Number</label>
+                    <input type="text" class="form-control" id="trackNumber" name="trackNumber"
+                           placeholder="Track's Number"
+                           value="{{ album.track_number }}">
+                </div>
+
+
+                <div class="col-lg-6">
+                    <label for="inputName">Rating</label>
+                    <input type="text" class="form-control" id="rating" name="rating" placeholder="Track's Rating"
+                           value="{{ album.rating }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+
+                    <label for="inputLocation">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Track's Location"
+                           value="{{ album.location }}">
+                </div>
+                <div class="col-lg-4">
+                    <label for="inputBpm">BPM</label>
+                    <input type="text" class="form-control" id="bpm" name="bpm" placeholder="Track's Bpm"
+                           value="{{ album.bpm }}">
+                </div>
+
+                <div class="col-lg-4">
+                    <label for="inputTrackSize">Track Size</label>
+                    <input type="number" class="form-control" id="trackSize" name="trackSize" placeholder="Track's Size"
+                           value="{{ album.size }}">
+                </div>
+            </div>
+
+            <input type="hidden" name="_method" value="{{ webInfo.method }}">
+            <button type="submit" class="btn btn-success">{{ webInfo.submit }}</button>
+        </form>
+    </div><!-- /.container -->
+{% endblock %}

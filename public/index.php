@@ -14,7 +14,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-$baseUrl = "https://" . $_SERVER['HTTP_HOST'] . $baseDir;
+$baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
 define('BASE_URL', $baseUrl);
 if (file_exists(__DIR__ . '/../.env')) {
     $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
@@ -57,8 +57,12 @@ $router->group(['before' => 'auth'], function ($router){
 
     $router->get('/album/add', ['\App\Controllers\AlbumController', 'getAdd']);
     $router->post('/album/add', ['\App\Controllers\AlbumController', 'postAdd']);
+
     $router->get('/album/edit/{name}', ['\App\Controllers\AlbumController', 'getEdit']);
     $router->put('/album/edit/{name}', ['\App\Controllers\AlbumController', 'putEdit']);
+    $router->get('/album/{name}/track/{trackName}', ['\App\Controllers\TrackController', 'getTrack']);
+    $router->put('/album/{name}/track/{trackName}', ['\App\Controllers\TrackController', 'putTrack']);
+
     $router->delete('/album', ['\App\Controllers\AlbumController', 'deleteIndex']);
     $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
 });

@@ -17,45 +17,43 @@ SET time_zone = "+00:00";
 -- Table structure for table `tracks`
 --
  create database atuns
+-- phpMyAdmin SQL Dump
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Nov 09, 2017 at 03:24 PM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tracks`
+--
+ create database atuns
 
 CREATE TABLE  track
 (
   id                   INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  size                 TEXT                NOT NULL,
-  total_time           TEXT                NOT NULL,
-  date_added           TEXT                NOT NULL,
-  play_date            TEXT                NOT NULL,
-  play_date_utc        TEXT                NOT NULL,
-  persistent_id        VARCHAR(100)        NOT NULL,
-  track_type           VARCHAR(100)        NOT NULL,
-  file_folder_count    VARCHAR(100)        NOT NULL,
   album                TEXT                NOT NULL,
   genre                TEXT                NOT NULL,
   name                 VARCHAR(100)        NOT NULL,
   artist               TEXT                NOT NULL,
-  location             TEXT                NOT NULL,
+    size                 TEXT,
+  location             TEXT,
   rating               TEXT,
   track_number         TEXT,
   bpm                  TEXT,
-  date_modified        TEXT,
-  bit_rate             TEXT,
-  sample_rate          TEXT,
-  play_count           TEXT,
-  skip_count           TEXT,
-  skip_date            TEXT,
-  rating_computed      TEXT,
-  compilation          TEXT,
-  artwork_count        TEXT,
-  album_artist         TEXT,
-  kind                 TEXT,
-  library_folder_count VARCHAR(100),
-  sort_album_list      TEXT,
     `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-;
 
 CREATE TABLE  album
 (
@@ -68,6 +66,54 @@ CREATE TABLE  album
   `updated_at` datetime NOT NULL
 );
 
+
+--
+-- Dumping data for table `tracks`
+--
+
+
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('2424234', 'Hans', 'C:', '1', '160', '5', 'Hans zimmer live', 'ost', 'track01');
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('2424234', 'Hans', 'C:', '2', '110', '2', 'Hans zimmer live', 'ost', 'track02');
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('123123', 'Hans', 'C:', '3', '110', '5', 'Hans zimmer live', 'ost', 'track03');
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('2424234', 'Hans', 'C:', '4', '160', '2', 'Hans zimmer live', 'ost', 'track04');
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('2424234', 'Hans', 'C:', '5', '110', '1', 'Hans zimmer live', 'ost', 'track05');
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('123123', 'Hans', 'C:', '6', '110', '2', 'Hans zimmer live', 'ost', 'track06');
+
+
+
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('12312', 'Estopa', 'C:', '1', '160', '5', 'Esto es estopa', 'pop', 'Aire');
+
+  INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('124124', 'Estopa', 'C:', '2', '160', '4', 'Esto es estopa', 'pop', 'Barrio');
+
+INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('124124', 'Estopa', 'C:', '3', '160', '2', 'Esto es estopa', 'pop', 'Campo');
+
+  INSERT INTO track (size,   artist, location, track_number, bpm, rating,album, genre,name)
+VALUES
+  ('12312', 'Estopa', 'C:', '5', '222', '3', 'Esto es estopa', 'pop', 'Sole!');
+
+
+INSERT into album (name, artist, image, album_type) VALUES ("Esto es estopa","estopa","https://pbs.twimg.com/profile_images/2892128671/c556a247b8c750b6f6b4e9789d124438.jpeg","album");
+INSERT into album (name, artist, image, album_type) VALUES ("Hans zimmer live","Hans","https://c-sf.smule.com/sf/s60/arr/82/16/3943afa6-9421-4dce-8b4c-8648b3b793b1_256.jpg","album");
+
+
 create table  user
 (
   id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -77,78 +123,3 @@ create table  user
 	created_at datetime not null,
 	updated_at datetime not null
 );
---
--- Dumping data for table `tracks`
---
-
-
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track01',
-    'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
-                      'track02', 'hans', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-   NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track03',
-    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
-                      'track04', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-   NULL, NULL, NULL, NULL);
-
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track05',
-    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
-                      'track06', 'hans', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-   NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('2424234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost', 'track07',
-    'hans', 'c:', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('242423434234234', '3423423', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'Hans zimmer live', 'ost',
-                      'track08', 'hans', 'c:', '5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-   NULL, NULL, NULL, NULL);
-
-
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'esto es estopa', 'pop', 'track01',
-    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '5', 'esto es estopa', 'pop', 'track02',
-    'estopa', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track03',
-    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track04',
-    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track05',
-    'estopa', 'c:', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '1', 'esto es estopa', 'pop', 'track06',
-    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO track (size, total_time, date_added, play_date, play_date_utc, persistent_id, track_type, file_folder_count, album, genre, name, artist, location, rating, track_number, bpm, date_modified, bit_rate, sample_rate, play_count, skip_count, skip_date, rating_computed, compilation, artwork_count, album_artist, kind, library_folder_count, sort_album_list)
-VALUES
-  ('234232', '7534523', '2014-02-20', '2010-02-12', '2010-02-20', '2323', 'mp3', '2', 'esto es estopa', 'pop', 'track07',
-    'estopa', 'c:', '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT into album (name, artist, image, album_type) VALUES ("Esto es estopa","estopa","https://pbs.twimg.com/profile_images/2892128671/c556a247b8c750b6f6b4e9789d124438.jpeg","album");
-INSERT into album (name, artist, image, album_type) VALUES ("Hans zimmer live","Hans","https://c-sf.smule.com/sf/s60/arr/82/16/3943afa6-9421-4dce-8b4c-8648b3b793b1_256.jpg","album");
