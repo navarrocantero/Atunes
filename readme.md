@@ -22,9 +22,12 @@ $ mysql -u username -p < createdb.sql
 donde _username_ y _password_ son las credenciales de acceso a tu servidor MySQL.
 
 ### PHPMyadmin, Datagrip y similares
+Lo primero que debes hacer es crear una base de datos : 
 
-Copia el contenido de **_sql.sql_**  y pegalo en la consola de tu ide. 
+create database atuns;
 
+Despues abre la consola SQL de esa BBDD e introduce
+  el contenido de **_sql.sql_**.
 
 Si todo ha salido correctamente deberias tener esto :
 
