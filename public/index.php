@@ -69,6 +69,8 @@ $router->group(['before' => 'auth'], function ($router){
 
 
     $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
+    $router->get('/profile', ['\App\Controllers\HomeController', 'getProfile']);
+    $router->post('/profile', ['\App\Controllers\HomeController', 'postProfile']);
 });
 
 // Filtro para aplicar a rutas a USUARIOS NO AUTENTICADOS
@@ -79,6 +81,7 @@ $router->filter('noAuth', function(){
         return false;
     }
 });
+
 $router->group(['before' => 'noAuth'], function ($router){
     $router->get('/login', ['\App\Controllers\HomeController', 'getLogin']);
     $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);

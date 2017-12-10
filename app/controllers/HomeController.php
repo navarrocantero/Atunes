@@ -56,4 +56,12 @@ class HomeController extends BaseController
     public function  getLogout(){
         return ((new AuthController()))->getLogout();
     }
+
+    public function  getProfile(){
+        return ((new AuthController()))->getProfile();
+    }
+
+    public function  postProfile(){
+        return ((new AuthController()))->postProfile();
+    }
 }

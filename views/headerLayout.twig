@@ -31,10 +31,11 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">{
                         {% if session.userId %}
+                            <li><a href="{{ 'profile' | url }}">Profile</a></li>
                             <li><a href="{{ 'logout' | url }}">Logout</a></li>
                         {% else %}
-                            <li><a class="text-justify" href="{{ 'login' | url }}">Log in</a></li>
-                            <li><a class="text-justify" href="{{ 'register' | url }}">Sign Up</a></li>
+                            <li><a class="text-justify" href="{{ 'login' | url }}">Login</a></li>
+                            <li><a class="text-justify" href="{{ 'register' | url }}">Register</a></li>
                         {% endif %}
                     </ul>
                 </li>
