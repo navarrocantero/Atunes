@@ -36,40 +36,42 @@ Si todo ha salido correctamente deberias tener esto :
 La web cuenta con rutas para usuarios autenticados, sin autenticar, y rutas libres.
 
 La mayoria de las rutas solo estan permitidas para los usuarios Logueados.
+
+
 ### Rutas autenticadas
 
-####get y post => (/album/add);  
-#####Para añadir nuevo album
-####get y post => (/album/edit/{nombre_album}) 
-#####Para editar album existente
-####delete      => (/album)
-#####Para borrar un album (obvio?)
-####get y post => (/album/{nombre_album}) 
-#####Para editar un album  
-####get y post => (/album/{nombre_album}/add) 
-#####Para añadir una cancion al album
-####delete      => (/album/{track_name})
-#####Para borrar una cancion
-####get y put => (/album/{nombre_album}/track/{nombre_cancion}) 
-#####Para editar una cancion del album
-####get      => (/logout) 
-#####Desloguea al usuario
-####get y post      => (/profile) 
-#####Para modificar la cuenta del usuario 
+#### get y post => (/album/add);  
+##### Para añadir nuevo album
+#### get y post => (/album/edit/{nombre_album}) 
+##### Para editar album existente
+#### delete      => (/album)
+##### Para borrar un album (obvio?)
+#### get y post => (/album/{nombre_album}) 
+##### Para editar un album  
+#### get y post => (/album/{nombre_album}/add) 
+##### Para añadir una cancion al album
+#### delete      => (/album/{track_name})
+##### Para borrar una cancion
+#### get y put => (/album/{nombre_album}/track/{nombre_cancion}) 
+##### Para editar una cancion del album
+#### get      => (/logout) 
+##### Desloguea al usuario
+#### get y post      => (/profile) 
+##### Para modificar la cuenta del usuario 
    
 ### Rutas  No autenticadas
-####get y post => (/login);  
-#####Para loguearse el usuario
+#### get y post => (/login);  
+##### Para loguearse el usuario
 ####get y post => (/register);  
-#####Para registrarse el usuario 
+##### Para registrarse el usuario 
 
    
 ### Rutas  Sin control de acceso
-####get   => (/);  
-#####Muestra el index de la pagina
-####get   => (/album/{nombre_album});  
-#####Muestra contenido de un album
-####get   => (/api);  
-#####Devuelve un JSON con todos los albunes del sistema
-####get   => (/api/{album_name});  
-#####Devuelve un JSON con todas las canciones de un determinado album 
+#### get   => (/);  
+##### Muestra el index de la pagina
+#### get   => (/album/{nombre_album});  
+##### Muestra contenido de un album
+#### get   => (/api);  
+##### Devuelve un JSON con todos los albunes del sistema
+#### get   => (/api/{album_name});  
+##### Devuelve un JSON con todas las canciones de un determinado album 
