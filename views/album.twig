@@ -23,13 +23,15 @@
             <tbody>
             {% for track in tracks %}
                 <tr>
-                    <td>
+                    <td>  {% if session.userId %}
                         <a href="/album/{{ tracks[0].album }}/track/{{ track.id }}">
+                            {% endif %}
                             {{ track.name }}
                         </a>
                     </td>
                     <td class="row">{{ track.rating }}</td>
                     <td class="row">{{ track.bpm }}</td>
+                {% if session.userId %}
                     <td>
                         <form action="/album/{{ tracks[0].album }}" method="POST" id="deleteAlbum-{{ track.id }}">
                             <input type="hidden" name="id" value="{{ track.id }}">
@@ -38,16 +40,20 @@
                                         class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </form>
                     </td>
+                {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        <a href="/album/{{ tracks[0].album }}/track/new">
-            {{ track.name }}
-        </a>
-        <div class="buttonIndex">
-            <button type="submit" class="btn  btn-lg btn-success "><a href="/album/{{ tracks[0].album }}/add"> Add</a>
-            </button>
-        </div>
+        {% if session.userId %}
+            <a href="/album/{{ tracks[0].album }}/track/new">
+                {{ track.name }}
+            </a>
+            <div class="buttonIndex">
+                <button type="submit" class="btn  btn-lg btn-success "><a href="/album/{{ tracks[0].album }}/add">
+                        Add</a>
+                </button>
+            </div>
+        {% endif %}
     </div><!-- /.container -->
 {% endblock %}
