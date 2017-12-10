@@ -22,45 +22,65 @@ use App\Models\User;
 class HomeController extends BaseController
 {
 
+    /** Perform the Index of Album Controller
+     * @return string Render with all web's info.
+     */
     public function getIndex()
     {
         return ((new AlbumController())->getIndex());
     }
 
+    /** Perform the GET Login in Auth Controller
+     * @return string Render with all web's info.
+     */
     public function getLogin()
     {
 
         return ((new AuthController()))->getLogin();
     }
 
+    /** Perform the  Post Login in Auth Controller
+     * @return string Render with all web's info.
+     */
     public function postLogin()
     {
         return ((new AuthController()))->postLogin();
     }
 
+    /** Perform the  GET register in Register Controller
+     * @return string Render with all web's info.
+     */
     public function getRegister()
     {
 
         return ((new RegisterController()))->getRegister();
     }
 
+    /** Perform the  POST register in Register Controller
+     * @return string Render with all web's info.
+     */
     public function PostRegister()
     {
         return ((new RegisterController()))->postRegister();
     }
 
-    public function getDemo(){
-        return "OK";
-    }
-
+    /** Perform the  GET logout in Auth Controller
+     * @return string Render with all web's info.
+     */
     public function  getLogout(){
         return ((new AuthController()))->getLogout();
     }
 
+    /** Perform the  GET profile in Auth Controller
+     * @return string Render with all web's info.
+     */
     public function  getProfile(){
         return ((new AuthController()))->getProfile();
     }
 
+    /** Perform the  Post profile in Register Controller
+     * @return string Render with all web's info.
+     */
     public function  postProfile(){
         return ((new AuthController()))->postProfile();
     }

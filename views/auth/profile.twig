@@ -29,13 +29,9 @@
                        placeholder="Retype the new password">
             </div>
             {{ generateAlert(errors, 'newPassword2') }}
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember
-                </label>
+            <div class="buttonIndex">
+            <button class="btn btn-lg btn-success" type="submit">Register</button>
             </div>
-            <button class="btn btn-lg btn-primary" type="submit">Register</button>
         </form>
     </div> <!-- /container -->
 {% endblock %}

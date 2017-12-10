@@ -35,8 +35,10 @@
 
             </tbody>
         </table>
+    {% if session.userId %}
         <div class="buttonIndex">
-            <a type="submit" class="btn btn-success " href="{{ 'album/add' | url }}">Add</a>
+            <a type="submit" class="btn   btn-lg btn-success " href="{{ 'album/add' | url }}">Add</a>
         </div>
+        {% endif %}
     </div><!-- /.container -->
 {% endblock %}

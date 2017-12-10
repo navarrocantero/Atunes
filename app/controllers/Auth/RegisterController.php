@@ -14,6 +14,10 @@ use Sirius\Validation\Validator;
 
 class RegisterController extends BaseController
 {
+    /**
+     * Path GET /register shows a form to add new user
+     * @return string Render with all web's info.
+     */
     public function getRegister()
     {
         $webInfo = [
@@ -22,7 +26,10 @@ class RegisterController extends BaseController
 
         return $this->render('auth/profile.twig', ['webInfo' => $webInfo]);
     }
-
+    /**
+     * Path POST /register process the action of add a new user
+     * @return string Render with all web's info.
+     */
     public function postRegister()
     {
 

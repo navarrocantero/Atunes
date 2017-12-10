@@ -33,10 +33,4 @@ class ApiController
         header('Content-Type: application/json');
         return json_encode($tracks);
     }
-
-    public function postAlbum()
-    {
-        //Creo una distro en la BD desde un Json
-
-    }
 }

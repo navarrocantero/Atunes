@@ -5,6 +5,10 @@ class BaseController {
 
     public $templateEngine;
 
+    /**
+     * Template for all Controllers
+     * BaseController constructor
+     */
     public function __construct()
     {
         // Inicializar motor de template

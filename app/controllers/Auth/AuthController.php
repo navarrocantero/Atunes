@@ -14,6 +14,10 @@ use Sirius\Validation\Validator;
 
 class AuthController extends BaseController
 {
+    /**
+     * Path GET /register shows a form to log in in web
+     * @return string Render with all web's info.
+     */
     public function getLogin()
     {
 
@@ -24,6 +28,10 @@ class AuthController extends BaseController
         return $this->render('auth/login.twig', ["webInfo" => $webIinfo]);
     }
 
+    /**
+     * Path POST /album/add process the action of add a new album
+     * @return string Render with all web's info.
+     */
     public function postLogin()
     {
         $errors = [];
@@ -54,6 +62,10 @@ class AuthController extends BaseController
         return $this->render('auth/login.twig', ['errors' => $errors]);
     }
 
+    /**
+     * Path GET /logout perform the accion of logout the current user
+     * @return string Render with all web's info.
+     */
     public function getLogout()
     {
         unset($_SESSION['userId']);
@@ -62,6 +74,10 @@ class AuthController extends BaseController
         header("Location: " . BASE_URL);
     }
 
+    /**
+     * Path GET /register shows a form to update the current user
+     * @return string Render with all web's info.
+     */
     public function getProfile()
     {
         $user = [
@@ -78,6 +94,10 @@ class AuthController extends BaseController
         ]);
     }
 
+    /**
+     * Path POST /profile process the action update the  current user
+     * @return string Render with all web's info.
+     */
     public function postProfile()
     {
         $webIinfo = [

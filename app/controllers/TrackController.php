@@ -14,55 +14,6 @@ use Sirius\Validation\Validator;
 
 class TrackController extends BaseController
 {
-
-//    public function putTrack($name)
-//    {
-//        dameDato($_POST);
-//        $errors = array();  // Array donde se guardaran los errores de validación
-//        $webInfo = [
-//            'h1' => 'Update Track',
-//            'submit' => 'Update',
-//            'method' => 'PUT'
-//        ];
-//
-//        if (!empty($_POST)) {
-////            dameDato($_POST);
-//            // Validate NOT NULL fields
-//            $validator = new Validator();
-//            $requiredFieldMessageError = "The field {label} is required";
-//            $validator->add('name:Name', 'required', [], $requiredFieldMessageError);
-//            $validator->add('artist:Artist', 'required', [], $requiredFieldMessageError);
-//            $validator->add('genre:Genre', 'required', [], $requiredFieldMessageError);
-//            $validator->add('album:Album', 'required', [], $requiredFieldMessageError);
-//
-//            // Extrct POST DATA
-//            $album['name'] = htmlspecialchars(trim($_POST['name']));
-//            $album['artist'] = htmlspecialchars(trim($_POST['artist']));
-//            $album['genre'] = htmlspecialchars(trim($_POST['genre']));
-//            $album['album'] = htmlspecialchars(trim($_POST['album']));
-//            ;
-//
-//            if ($validator->validate($album)) {
-//                Track::where('name', $album['name'])->update([
-//                    'name' => $album['name'],
-//                    'artist' => $album['artist'],
-//                    'genre' => $album['genre'],
-//                    'album' => $album['album'],
-//                ]);
-//
-//                // Si se guarda sin problemas se redirecciona la aplicación a la página de inicio
-//                header('Location: ' . BASE_URL);
-//            } else {
-//                $errors = $validator->getMessages();
-//            }
-//        }
-//        return $this->render('track.twig', [
-//            'album' => $album,
-//            'errors' => $errors,
-//            'webInfo' => $webInfo
-//        ]);
-//    }
-
     /**
      * Path GET /album/{{album.name}}/track/{{track.id}} to show
      * all info about one album's track

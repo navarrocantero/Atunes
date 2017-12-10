@@ -34,23 +34,20 @@
                         <form action="/album/{{ tracks[0].album }}" method="POST" id="deleteAlbum-{{ track.id }}">
                             <input type="hidden" name="id" value="{{ track.id }}">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" id="deleteForm" class="btn btn-link btn-alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            <button type="submit" id="deleteForm" class="btn btn-link btn-alert"><span
+                                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </form>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
-            <a href="/album/{{ tracks[0].album }}/track/new">
-                {{ track.name }}
-            </a>
-
+        <a href="/album/{{ tracks[0].album }}/track/new">
+            {{ track.name }}
+        </a>
         <div class="buttonIndex">
-            {#<form action="/album/{{ tracks[0].album }}/track/new" method="{{ webInfo.method }}">#}
-                {#<input type="hidden" name="album" value="{{ tracks[0].album }}">#}
-                <button type="submit" class="btn btn-success "><a href="/album/{{ tracks[0].album }}/add"> Add</a></button>
-            {#</form>#}
+            <button type="submit" class="btn  btn-lg btn-success "><a href="/album/{{ tracks[0].album }}/add"> Add</a>
+            </button>
         </div>
     </div><!-- /.container -->
 {% endblock %}
