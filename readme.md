@@ -31,6 +31,8 @@ Si todo ha salido correctamente deberias tener esto :
 
 ![Ejemplo](https://i.imgur.com/u0r9x7s.png)
 
+En caso contrario, puedes mandarme un MD con tu problema.
+
 ### Rutas de acceso
 
 La web cuenta con rutas para usuarios autenticados, sin autenticar, y rutas libres.
@@ -62,7 +64,7 @@ La mayoria de las rutas solo estan permitidas para los usuarios Logueados.
 ### Rutas  No autenticadas
 #### get y post => (/login);  
 ##### Para loguearse el usuario
-####get y post => (/register);  
+#### get y post => (/register);  
 ##### Para registrarse el usuario 
 
    
