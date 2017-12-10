@@ -7,17 +7,17 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group  {% if errors['name'] %}has-error{% endif %}">
-                        <label for="inputName">Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Track's Name"
-                               value="{{ album.name }}">
+                               value="{{ track.name }}">
                     </div>
                     {{ generateAlert(errors, 'name') }}
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group  {% if errors['album'] %}has-error{% endif %}">
-                        <label for="inputAlbum">Album</label>
+                        <label for="album">Album</label>
                         <input type="text" class="form-control" id="album" name="album" placeholder="Album name"
-                               value="{{ album.album }}">
+                               value="{{ track.album }}">
                     </div>
                     {{ generateAlert(errors, 'album') }}
                 </div>
@@ -25,17 +25,17 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group  {% if errors['genre'] %}has-error{% endif %}">
-                        <label for="inputGenre">Genre</label>
+                        <label for="genre">Genre</label>
                         <input type="text" class="form-control" id="genre" name="genre" placeholder="Track's Genre"
-                               value="{{ album.genre }}">
+                               value="{{ track.genre }}">
                     </div>
                     {{ generateAlert(errors, 'genre') }}
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group  {% if errors['artist'] %}has-error{% endif %}">
-                        <label for="intputAlbum">Artist</label>
+                        <label for="artist">Artist</label>
                         <input type="text" class="form-control" id="artist" name="artist" placeholder="Track's Artist"
-                               value="{{ album.artist }}">
+                               value="{{ track.artist }}">
                     </div>
                     {{ generateAlert(errors, 'artist') }}
                 </div>
@@ -43,36 +43,36 @@
             <div class="row">
                 <div class="col-lg-6">
 
-                    <label for="inputTrackNumber">Track Number</label>
-                    <input type="text" class="form-control" id="trackNumber" name="trackNumber"
+                    <label for="track_number">Track Number</label>
+                    <input type="text" class="form-control" id="track_number" name="track_number"
                            placeholder="Track's Number"
-                           value="{{ album.track_number }}">
+                           value="{{ track.track_number }}">
                 </div>
 
 
                 <div class="col-lg-6">
-                    <label for="inputName">Rating</label>
+                    <label for="rating">Rating</label>
                     <input type="text" class="form-control" id="rating" name="rating" placeholder="Track's Rating"
-                           value="{{ album.rating }}">
+                           value="{{ track.rating }}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4">
 
-                    <label for="inputLocation">Location</label>
+                    <label for="location">Location</label>
                     <input type="text" class="form-control" id="location" name="location" placeholder="Track's Location"
-                           value="{{ album.location }}">
+                           value="{{ track.location }}">
                 </div>
                 <div class="col-lg-4">
-                    <label for="inputBpm">BPM</label>
+                    <label for="bpm">BPM</label>
                     <input type="text" class="form-control" id="bpm" name="bpm" placeholder="Track's Bpm"
-                           value="{{ album.bpm }}">
+                           value="{{ track.bpm }}">
                 </div>
 
                 <div class="col-lg-4">
-                    <label for="inputTrackSize">Track Size</label>
-                    <input type="number" class="form-control" id="trackSize" name="trackSize" placeholder="Track's Size"
-                           value="{{ album.size }}">
+                    <label for="size">Track Size</label>
+                    <input type="number" class="form-control" id="size" name="size" placeholder="Track's Size"
+                           value="{{ track.size }}">
                 </div>
             </div>
 

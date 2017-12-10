@@ -15,7 +15,7 @@ function convierteCadena($array)
 
 function convierteArray($string)
 {
-    return explode(", ", $string);
+    return explode("/", $string);
 }
 
 /**

@@ -26,9 +26,13 @@
             <tbody>
             {% for track in tracks %}
                 <tr>
-                    <td class="row"><a href="/album/{{ tracks[0].album }}/track/{{ track.name }}"> {{ track.name }}</a></td>
+                    <td>
+                        <a href="/album/{{ tracks[0].album }}/track/{{ track.id }}">
+                            {{ track.name }}
+                        </a>
+                    </td>
                     <td class="row">{{ track.rating }}</td>
-                    <td class="row">{{ track.genre }}</td>
+                    <td class="row">{{ track.bpm }}</td>
                 </tr>
             {% endfor %}
             </tbody>
