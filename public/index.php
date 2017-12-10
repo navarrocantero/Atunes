@@ -14,7 +14,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-$baseUrl = "https://" . $_SERVER['HTTP_HOST'] . $baseDir;
+$baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
 define('BASE_URL', $baseUrl);
 if (file_exists(__DIR__ . '/../.env')) {
     $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');

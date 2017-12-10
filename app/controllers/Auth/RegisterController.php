@@ -20,7 +20,7 @@ class RegisterController extends BaseController
             'title' => "Register"
         ];
 
-        return $this->render('auth/register.twig', ['webInfo' => $webInfo]);
+        return $this->render('auth/profile.twig', ['webInfo' => $webInfo]);
     }
 
     public function postRegister()
@@ -59,7 +59,7 @@ class RegisterController extends BaseController
             } else {
                 $errors = $validator->getMessages();
             }
-            return $this->render('auth/register.twig', [
+            return $this->render('auth/profile.twig', [
                 'user' => $user,
                 'errors' => $errors,
                 'webInfo' => $webInfo
