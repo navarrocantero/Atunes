@@ -21,11 +21,15 @@ class RegisterController extends BaseController
     public function getRegister()
     {
         $webInfo = [
-            'title' => "Register"
+            'title' => "Register",
+            'method' => "post",
+            'button'=> "Register",
+            'url' => "register"
         ];
 
         return $this->render('auth/profile.twig', ['webInfo' => $webInfo]);
     }
+
     /**
      * Path POST /register process the action of add a new user
      * @return string Render with all web's info.
@@ -34,16 +38,18 @@ class RegisterController extends BaseController
     {
 
         $webInfo = [
-            'title' => "Register"
+            'title' => "Register",
+            'method' => "post",
+            'button'=> "Register",
+            'url' => "register"
         ];
-
 
         $validator = new Validator();
 
         $errors = [];
         if (!empty($_POST)) {
-            $user['name'] = htmlspecialchars(trim($_POST['inputName']));
-            $user['email'] = htmlspecialchars(trim($_POST['inputEmail']));
+            $user['userName'] = htmlspecialchars(trim($_POST['inputName']));
+            $user['userEmail'] = htmlspecialchars(trim($_POST['inputEmail']));
 
             $validator->add('inputName:Nombre', 'required', [], 'The field {label} is required');
             $validator->add('inputName:Nombre', 'minlength', ['min' => 5], 'The field {label} must have 5 charachters at least');
@@ -55,8 +61,6 @@ class RegisterController extends BaseController
             $validator->add('inputPassword2:Password', 'match', 'inputPassword1', 'The passwords dont match');
 
             if ($validator->validate($_POST)) {
-                $users = User::query()->where('email', $user['email'])->get();
-//
                 $user = new User();
                 $user->name = $_POST['inputName'];
                 $user->email = $_POST['inputEmail'];

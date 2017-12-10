@@ -1,7 +1,7 @@
 {% extends 'headerLayout.twig' %}
 {% block content %}
     <div class="container">
-        <form class=" " method="post" action="{{ 'profile'|url }}">
+        <form  method="{{ webInfo.method }}" action="{{ webInfo.url |url }}">
             <h2 class="form-signin-heading">{{ webInfo.title }}</h2>
             <div class="form-group {% if errors['inputName'] %}has-error{% endif %}">
                 <label for="inputName" class="sr-only">Email</label>
@@ -16,21 +16,22 @@
             </div>
             {{ generateAlert(errors, 'inputEmail') }}
 
-            <div class=" form-group {% if errors['newPassword1'] %}has-error{% endif %}">
-                <label for="newPassword1" class="sr-only">Password</label>
-                <input type="password" id="newPassword1" class="form-control" name="newPassword1"
+            <div class=" form-group {% if errors['inputPassword1'] %}has-error{% endif %}">
+                <label for="inputPassword1" class="sr-only">Password</label>
+                <input type="password" id="inputPassword1" class="form-control" name="inputPassword1"
                        placeholder="New password">
             </div>
-            {{ generateAlert(errors, 'newPassword1') }}
+            {{ generateAlert(errors, 'inputPassword1') }}
 
-            <div class=" form-group {% if errors['newPassword2'] %}has-error{% endif %}">
-                <label for="newPassword2" class="sr-only">Password </label>
-                <input type="password" id="newPassword2" class="form-control" name="newPassword2"
+            <div class=" form-group {% if errors['inputPassword2'] %}has-error{% endif %}">
+                <label for="inputPassword2" class="sr-only">Password </label>
+                <input type="password" id="newPassword2" class="form-control" name="inputPassword2"
                        placeholder="Retype the new password">
             </div>
-            {{ generateAlert(errors, 'newPassword2') }}
+            {{ generateAlert(errors, 'inputPassword2') }}
+
             <div class="buttonIndex">
-            <button class="btn btn-lg btn-success" type="submit">Register</button>
+            <button class="btn btn-lg btn-success" type="submit">{{ webInfo.button }}</button>
             </div>
         </form>
     </div> <!-- /container -->

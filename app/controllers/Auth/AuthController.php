@@ -47,6 +47,7 @@ class AuthController extends BaseController
 //            $user = User::query()->where('email', $_POST['inputEmail'])->first();
             $user = User::where('email', $_POST['inputEmail'])->first();
 
+
             if (password_verify($_POST['inputPassword'], $user->password)) {
                 $_SESSION['userId'] = $user->id;
                 $_SESSION['userName'] = $user->name;
@@ -85,12 +86,15 @@ class AuthController extends BaseController
             'userEmail' => $_SESSION['userEmail']
         ];
         $webIinfo = [
-            'title' => "Profile"
+            'title' => "Profile",
+            'method' => "POST",
+            'button'=> "Update",
+            'url' => "profile"
         ];
 
         return $this->render('auth/profile.twig', [
             "webInfo" => $webIinfo,
-            "user" => $user
+            "user" => $user,
         ]);
     }
 
@@ -101,8 +105,12 @@ class AuthController extends BaseController
     public function postProfile()
     {
         $webIinfo = [
-            'title' => "Profile"
+            'title' => "Profile",
+            'method' => "POST",
+            'button'=> "Update",
+            'url' => "profile"
         ];
+
 
         $validator = new Validator();
         $errors = [];
@@ -113,26 +121,24 @@ class AuthController extends BaseController
 
         // Extract OLD USER DATA FROM DATABASE
         $oldUserData = User::where('email', $_SESSION['userEmail'])->first();
-
         // Some validations ( like the RegisterController but no the same  )
         $validator->add('inputName:Nombre', 'required', [], 'The field {label} is required');
         $validator->add('inputName:Nombre', 'minlength', ['min' => 5], 'The field {label} must have 5 charachters at least');
         $validator->add('inputEmail:Email', 'required', [], 'The field {label} is required');
         $validator->add('inputEmail:Email', 'email', [], 'Type a correct email format');
-        $validator->add('newPassword1:Password', 'required', [], 'The field {label} is required');
-        $validator->add('newPassword1:Password', 'minlength', ['min' => 8], 'The field {label} must have 8 charachters at least');
-        $validator->add('newPassword2:Password', 'required', [], 'The field {label} is required');
-        $validator->add('newPassword1:Password', 'match', 'newPassword2', 'The passwords dont match');
+        $validator->add('inputPassword1:Password', 'required', [], 'The field {label} is required');
+        $validator->add('inputPassword1:Password', 'minlength', ['min' => 8], 'The field {label} must have 8 charachters at least');
+        $validator->add('inputPassword2:Password', 'required', [], 'The field {label} is required');
+        $validator->add('inputPassword1:Password', 'match', 'inputPassword2', 'The passwords dont match');
 
         if ($validator->validate($_POST)) {
-            // A test to validate if the user type the correct old password
-                $oldUserData->update([
-                    'id' => $oldUserData->id,
-                    'name' => $user['userName'],
-                    'email' => $user['userEmail'],
-                    'password' => password_hash($_POST['newPassword1'], PASSWORD_DEFAULT)
-                ]);
-                header('Location: ' . BASE_URL);
+            $oldUserData->update([
+                'id' => $oldUserData->id,
+                'name' => $user['userName'],
+                'email' => $user['userEmail'],
+                'password' => password_hash($_POST['inputPassword1'], PASSWORD_DEFAULT)
+            ]);
+            header('Location: ' . BASE_URL);
 
         } else {
             $errors = $validator->getMessages();
