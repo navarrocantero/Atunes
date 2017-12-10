@@ -28,12 +28,22 @@ create database atuns;
 Despues abre la consola SQL de esa BBDD e introduce
   el contenido de **_sql.sql_**.
 
+## Instalar dependencias
+
+Desde la terminal situate en la carpeta del proyecto e introduce [composer](https://getcomposer.org/) install.
+
+## Configurar ruta de inicio
+
+En   [mamp](https://www.mamp.info/en/) selecciona la ruta de inicio como atuns/public
+
+
 Si todo ha salido correctamente deberias tener esto :
 
 
 ![Ejemplo](https://i.imgur.com/u0r9x7s.png)
 
 En caso contrario, puedes mandarme un MD con tu problema.
+
 
 ### Rutas de acceso
 
