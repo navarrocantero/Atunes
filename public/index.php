@@ -61,8 +61,12 @@ $router->group(['before' => 'auth'], function ($router){
     $router->put('/album/edit/{name}', ['\App\Controllers\AlbumController', 'putEdit']);
     $router->delete('/album', ['\App\Controllers\AlbumController', 'deleteIndex']);
 
+    $router->get('/album/{name}/add', ['\App\Controllers\TrackController', 'getAdd']);
+    $router->post('/album/{name}/add', ['\App\Controllers\TrackController', 'postAdd']);
+    $router->delete('/album/{name}', ['\App\Controllers\TrackController', 'deleteIndex']);
     $router->get('/album/{name}/track/{trackName}', ['\App\Controllers\TrackController', 'getTrack']);
     $router->put('/album/{name}/track/{trackName}', ['\App\Controllers\TrackController', 'putTrack']);
+
 
     $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
 });

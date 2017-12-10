@@ -159,4 +159,105 @@ class TrackController extends BaseController
         ]);
     }
 
+    /**
+     * Path GET /album/{{album.name}}/track/add
+     * shows a form to add a new album's track
+     * @return string Render with all web's info.
+     */
+    public function getAdd($albumName)
+    {
+
+        $errors = array();  // Array donde se guardaran los errores de validación
+        $album = Album::query()->where('name', $albumName)->get();
+        $track = [
+            'album' => $albumName,
+            'artist' => $album->get(0)['artist']
+        ];
+
+        $webInfo = [
+            'h1' => 'Add Track',
+            'submit' => 'Add',
+            'method' => 'POST'
+        ];
+        return $this->render('track.twig', [
+            'track' => $track,
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
+
+    /**
+     * Path POST /album/add process the action of
+     * add a new album's track
+     * @return string Render with all web's info.
+     */
+    public function postAdd()
+    {
+        $errors = array();  // Array donde se guardaran los errores de validación
+
+
+        $webInfo = [
+            'h1' => 'Add Track',
+            'submit' => 'Add',
+            'method' => 'POST'
+        ];
+        if (!empty($_POST)) {
+
+            // Validate NOT NULL fields
+            $validator = new Validator();
+
+            $requiredFieldMessageError = "The field {label} is required";
+
+            $validator->add('name:Name', 'required', [], $requiredFieldMessageError);
+            $validator->add('artist:Artist', 'required', [], $requiredFieldMessageError);
+            $validator->add('genre:Genre', 'required', [], $requiredFieldMessageError);
+            $validator->add('album:Album', 'required', [], $requiredFieldMessageError);
+
+            // Extrct POST DATA
+            $track['name'] = htmlspecialchars(trim($_POST['name']));
+            $track['artist'] = htmlspecialchars(trim($_POST['artist']));
+            $track['genre'] = htmlspecialchars(trim($_POST['genre']));
+            $track['album'] = htmlspecialchars(trim($_POST['album']));
+            $track['track_number'] = htmlspecialchars(trim($_POST['track_number']));
+            $track['rating'] = htmlspecialchars(trim($_POST['rating']));
+            $track['location'] = htmlspecialchars(trim($_POST['location']));
+            $track['bpm'] = htmlspecialchars(trim($_POST['bpm']));
+            $track['size'] = htmlspecialchars(trim($_POST['size']));
+
+            if ($validator->validate($track)) {
+                $track = new Track([
+                    'name' => $track['name'],
+                    'artist' => $track['artist'],
+                    'genre' => $track['genre'],
+                    'album' => $track['album'],
+                    'track_number' => $track['track_number'],
+                    'rating' => $track['rating'],
+                    'location' => $track['location'],
+                    'bpm' => $track['bpm'],
+                    'size' => $track['size']
+                ]);
+                $track->save();
+                header('Location: ' . BASE_URL);
+            } else {
+                $errors = $validator->getMessages();
+            }
+        }
+        return $this->render('track.twig', [
+            'track' => $track,
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
+
+    /**
+     * Path DELETE /album to erase the album'strack with the $ID
+     */
+    public function deleteIndex()
+    {
+        $id = $_REQUEST['id'];
+
+        $track = Track::destroy($id);
+
+        header("Location: " . BASE_URL);
+    }
 }

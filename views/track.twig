@@ -3,7 +3,6 @@
     <div class="container">
         <h1>{{ webInfo.h1 }}</h1>
         <form method="post">
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group  {% if errors['name'] %}has-error{% endif %}">
@@ -75,9 +74,10 @@
                            value="{{ track.size }}">
                 </div>
             </div>
-
-            <input type="hidden" name="_method" value="{{ webInfo.method }}">
-            <button type="submit" class="btn btn-success">{{ webInfo.submit }}</button>
+            <div class="buttonIndex">
+                <input type="hidden" name="_method" value="{{ webInfo.method }}">
+                <button type="submit" class="btn btn-success">{{ webInfo.submit }}</button>
+            </div>
         </form>
     </div><!-- /.container -->
 {% endblock %}

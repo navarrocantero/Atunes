@@ -4,11 +4,8 @@
         <div class="header">
             <div class="row">
                 <h1 class="h2">{{ webInfo.title }}</h1>
-
                 <h2 class="h2">{{ tracks[0].artist }}</h2>
-
                 <h2 class="h2">{{ tracks[0].genre }}</h2>
-
             </div>
             <div class="row">
                 <img class="icon" src="{{ webInfo.image }}" alt="Logo de {{ webInfo.image }}">
@@ -33,15 +30,27 @@
                     </td>
                     <td class="row">{{ track.rating }}</td>
                     <td class="row">{{ track.bpm }}</td>
+                    <td>
+                        <form action="/album/{{ tracks[0].album }}" method="POST" id="deleteAlbum-{{ track.id }}">
+                            <input type="hidden" name="id" value="{{ track.id }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" id="deleteForm" class="btn btn-link btn-alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+            <a href="/album/{{ tracks[0].album }}/track/new">
+                {{ track.name }}
+            </a>
+
         <div class="buttonIndex">
-            <form action="{{ 'album/add' | url }}" method="get">
-                <input type="hidden" name="album" value="{{ tracks[0].album }}">
-                <button type="submit" class="btn btn-success "> Add</button>
-            </form>
+            {#<form action="/album/{{ tracks[0].album }}/track/new" method="{{ webInfo.method }}">#}
+                {#<input type="hidden" name="album" value="{{ tracks[0].album }}">#}
+                <button type="submit" class="btn btn-success "><a href="/album/{{ tracks[0].album }}/add"> Add</a></button>
+            {#</form>#}
         </div>
     </div><!-- /.container -->
 {% endblock %}
