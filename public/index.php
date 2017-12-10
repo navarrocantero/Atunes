@@ -45,8 +45,7 @@ $route = $_GET['route'] ?? "/";
 $router = new RouteCollector();
 
 
-// Filtro para aplicar a rutas a USUARIOS AUTENTICADOS
-// en el sistema
+// Filter to verify the auth's users
 $router->filter('auth', function(){
     if(!isset($_SESSION['userId'])){
         header('Location: '. BASE_URL);
@@ -73,8 +72,7 @@ $router->group(['before' => 'auth'], function ($router){
     $router->post('/profile', ['\App\Controllers\HomeController', 'postProfile']);
 });
 
-// Filtro para aplicar a rutas a USUARIOS NO AUTENTICADOS
-// en el sistema
+// Filter to verify the no auth's users
 $router->filter('noAuth', function(){
     if( isset($_SESSION['userId'])){
         header('Location: '. BASE_URL);
@@ -89,7 +87,7 @@ $router->group(['before' => 'noAuth'], function ($router){
     $router->post('/register', ['\App\Controllers\HomeController', 'postRegister']);
 });
 
-// Rutas sin filtros
+// Routes without filters
 $router->get('/', ['\App\Controllers\HomeController', 'getIndex']);
 $router->get('/album/{name}', ['\App\Controllers\AlbumController', 'getIndex']);
 $router->get('/api/{name}', ['\App\Controllers\ApiController', 'getAlbum']);
