@@ -6,14 +6,16 @@
  * Time: 00:02
  */
 require_once '../vendor/autoload.php';
-
+include_once '../helpers.php';
 session_start();
+
+
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-$baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
+$baseUrl = "https://" . $_SERVER['HTTP_HOST'] . $baseDir;
 define('BASE_URL', $baseUrl);
 if (file_exists(__DIR__ . '/../.env')) {
     $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
