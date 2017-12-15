@@ -13,9 +13,10 @@ session_start();
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-
 $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-$baseUrl = "http://" . $_SERVER['HTTP_HOST'] . $baseDir;
+$baseUrl = $_SERVER['HTTP_HOST'] . $baseDir;
+$protocol = (strpos($baseUrl, 'heroku')) ? "https://" : "http://";
+$baseUrl = $protocol.$baseUrl;
 define('BASE_URL', $baseUrl);
 if (file_exists(__DIR__ . '/../.env')) {
     $dotEnv = new Dotenv\Dotenv(__DIR__ . '/..');
