@@ -44,17 +44,16 @@ class AuthController extends BaseController
 
         if ($validator->validate($_POST)) {
 
-//            $user = User::query()->where('email', $_POST['inputEmail'])->first();
             $user = User::where('email', $_POST['inputEmail'])->first();
-
-
             if (password_verify($_POST['inputPassword'], $user->password)) {
-                $_SESSION['userId'] = $user->id;
-                $_SESSION['userName'] = $user->name;
-                $_SESSION['userEmail'] = $user->email;
+                if ( $user->id) {
+                    $_SESSION['userId'] = $user->id;
+                    $_SESSION['userName'] = $user->name;
+                    $_SESSION['userEmail'] = $user->email;
 
 
-                header('Location: ' . BASE_URL);
+                    header('Location: ' . BASE_URL);
+                }
             }
 
             $validator->addMessage('authError', 'User   or Pass are incorrect');
@@ -88,7 +87,7 @@ class AuthController extends BaseController
         $webIinfo = [
             'title' => "Profile",
             'method' => "POST",
-            'button'=> "Update",
+            'button' => "Update",
             'url' => "profile"
         ];
 
@@ -107,7 +106,7 @@ class AuthController extends BaseController
         $webIinfo = [
             'title' => "Profile",
             'method' => "POST",
-            'button'=> "Update",
+            'button' => "Update",
             'url' => "profile"
         ];
 

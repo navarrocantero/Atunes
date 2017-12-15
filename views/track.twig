@@ -1,4 +1,5 @@
 {% extends 'headerLayout.twig' %}
+
 {% block content %}
     <div class="container">
         <h1>{{ webInfo.h1 }}</h1>
@@ -81,4 +82,11 @@
             </div>
         </form>
     </div><!-- /.container -->
+{% endblock %}
+
+{% block js %}
+    <script src="{{ '' | url }}js/bloodhound/bloodhound.js"></script>
+    <script src="{{ '' | url }}js/typehead/typehead.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/bootstrap-tokenfield.min.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/tokenfield-distroada.js"></script>
 {% endblock %}
