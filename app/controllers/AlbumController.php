@@ -121,6 +121,7 @@ class AlbumController extends BaseController
 
             ];
             return $this->render('album.twig', [
+                'album' => $name,
                 'tracks' => $tracks,
                 'webInfo' => $webInfo
             ]);

@@ -118,6 +118,7 @@ class TrackController extends BaseController
     public function getAdd($albumName)
     {
 
+
         $errors = array();  // Array donde se guardaran los errores de validación
         $album = Album::query()->where('name', $albumName)->get();
         $track = [
@@ -143,7 +144,8 @@ class TrackController extends BaseController
      * @return string Render with all web's info.
      */
     public function postAdd()
-    {
+    {        dameDato("dsf");
+
         $errors = array();  // Array donde se guardaran los errores de validación
 
 
