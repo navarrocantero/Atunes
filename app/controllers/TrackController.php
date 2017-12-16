@@ -144,7 +144,7 @@ class TrackController extends BaseController
      * @return string Render with all web's info.
      */
     public function postAdd()
-    {        dameDato("dsf");
+    {
 
         $errors = array();  // Array donde se guardaran los errores de validación
 
