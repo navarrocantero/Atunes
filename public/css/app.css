@@ -45,3 +45,7 @@ table, .header {
     justify-content: space-between;
     display: flex;
 }
+
+.image{
+     width: 256px;
+}

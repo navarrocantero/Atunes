@@ -14,7 +14,7 @@
             <tbody>
             {% for album in albums %}
                 <tr>
-                    <td><img src="{{ album.image }}" alt="Logo de {{ album.image }}"></td>
+                    <td><img src="{{ album.image }}" class="image" alt="Logo de {{ album.image }}"></td>
                     <td class="row"><a href="album/{{ album.name }}">{{ album.name }}</a></td>
                     <td class="row">{{ album.artist }}</td>
                     <td class="row">{{ album.album_type }}</td>
